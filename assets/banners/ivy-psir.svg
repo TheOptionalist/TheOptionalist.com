@@ -1,0 +1,15 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="gip" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#eef2f6" />
+      <stop offset="55%" stop-color="#cbd6e2" />
+      <stop offset="100%" stop-color="#5b6b7f" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#gip)" />
+  <rect x="220" y="180" width="520" height="300" rx="30" fill="#ffffff" opacity="0.65" />
+  <rect x="900" y="420" width="520" height="300" rx="30" fill="#d8e1ee" opacity="0.65" />
+  <path d="M180 680 C340 520, 520 520, 720 640 C900 740, 1100 700, 1320 540" fill="none" stroke="#2b3a4f" stroke-width="7" opacity="0.5" />
+  <text x="200" y="520" font-family="Fraunces, serif" font-size="68" fill="#1f2b3a" opacity="0.92">Ivy League PSIR</text>
+  <text x="200" y="600" font-family="Sora, sans-serif" font-size="26" fill="#394b63" opacity="0.85">Theory, critique, and contemporary debates</text>
+</svg>
