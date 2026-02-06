@@ -1,0 +1,15 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7efe7" />
+      <stop offset="55%" stop-color="#e8d7c2" />
+      <stop offset="100%" stop-color="#c9846b" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#g1)" />
+  <circle cx="320" cy="260" r="180" fill="#fef6ee" opacity="0.8" />
+  <circle cx="1230" cy="610" r="240" fill="#d9b19b" opacity="0.7" />
+  <path d="M200 720 C420 540, 660 620, 860 450 C1060 280, 1280 320, 1460 180" fill="none" stroke="#8b2f1f" stroke-width="6" opacity="0.45" />
+  <text x="120" y="520" font-family="Fraunces, serif" font-size="72" fill="#2b1b14" opacity="0.9">Belief</text>
+  <text x="120" y="600" font-family="Sora, sans-serif" font-size="28" fill="#5a3a2c" opacity="0.85">Symbols, rituals, and social meaning</text>
+</svg>
