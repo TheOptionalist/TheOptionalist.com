@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Optionalist | Dashboard</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="site">
+    <header class="site-header">
+      <div class="brand">
+        <h1>The Optionalist</h1>
+        <span>Scholarship by Choice</span>
+      </div>
+      <nav class="nav-links">
+        <a href="/anthropology/">Anthropology</a>
+        <a href="/psir/">PSIR</a>
+        <a href="/blogs/">Blogs</a>
+        <a href="/stories/">Stories</a>
+        <a href="/dashboard">Dashboard</a>
+        <a class="nav-cta" href="/">Home</a>
+      </nav>
+    </header>
+    <main class="site-main">
+      <div class="container">
+        <section class="dashboard-shell">
+          <div class="dashboard-header">
+            <div>
+              <p class="dashboard-kicker">User Dashboard</p>
+              <h2>Welcome back</h2>
+              <p class="dashboard-sub">Track your courses, progress, notes, and payments.</p>
+            </div>
+            <div class="dashboard-actions">
+              <a class="button" href="/account">View Account</a>
+              <a class="button" href="/login">Login</a>
+            </div>
+          </div>
+
+          <div class="dashboard-metrics">
+            <div class="dashboard-card">
+              <span>Email</span>
+              <strong>student@example.com</strong>
+            </div>
+            <div class="dashboard-card">
+              <span>Program</span>
+              <strong>Anthropology</strong>
+            </div>
+            <div class="dashboard-card">
+              <span>Primary Course</span>
+              <strong>Human Evolution Sprint</strong>
+            </div>
+            <div class="dashboard-card">
+              <span>Joined</span>
+              <strong>12 Oct 2025</strong>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="dashboard-panel">
+              <div class="dashboard-panel-head">
+                <h3>My Courses</h3>
+                <a href="/anthropology/">Browse courses</a>
+              </div>
+              <div class="course-list">
+                <article class="course-item">
+                  <div>
+                    <h4>Human Evolution Sprint</h4>
+                    <p>Homo erectus quick revision</p>
+                  </div>
+                  <div class="course-meta">
+                    <span>Active</span>
+                    <div class="progress-track"><div class="progress-fill" style="width: 72%"></div></div>
+                    <small>72% complete</small>
+                  </div>
+                </article>
+                <article class="course-item">
+                  <div>
+                    <h4>Political Theory Core</h4>
+                    <p>Liberal theory frameworks</p>
+                  </div>
+                  <div class="course-meta">
+                    <span>Active</span>
+                    <div class="progress-track"><div class="progress-fill" style="width: 45%"></div></div>
+                    <small>45% complete</small>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <div class="dashboard-panel">
+              <div class="dashboard-panel-head">
+                <h3>Notes & Downloads</h3>
+                <a href="/blogs/">Open library</a>
+              </div>
+              <div class="notes-grid">
+                <div class="notes-card">
+                  <h4>Homo erectus revision pack</h4>
+                  <p>Quick recall sheet + exam prompts.</p>
+                  <button class="button">Download PDF</button>
+                </div>
+                <div class="notes-card">
+                  <h4>Liberal theory framework</h4>
+                  <p>Answer models + comparison table.</p>
+                  <button class="button">Download PDF</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashboard-panel">
+              <div class="dashboard-panel-head">
+                <h3>Payments</h3>
+                <a href="/">View invoices</a>
+              </div>
+              <div class="payment-list">
+                <div class="payment-item">
+                  <div>
+                    <h4>Human Evolution Sprint</h4>
+                    <p>22 Jan 2026</p>
+                  </div>
+                  <strong>?299</strong>
+                </div>
+                <div class="payment-item">
+                  <div>
+                    <h4>Political Theory Core</h4>
+                    <p>30 Jan 2026</p>
+                  </div>
+                  <strong>?299</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashboard-panel">
+              <div class="dashboard-panel-head">
+                <h3>Progress Tracker</h3>
+                <a href="/">Update goals</a>
+              </div>
+              <div class="progress-card">
+                <div>
+                  <h4>Weekly target</h4>
+                  <p>Complete 4 lessons + 2 answer drafts.</p>
+                </div>
+                <div class="progress-ring"><span>3/6</span></div>
+              </div>
+              <div class="progress-list">
+                <div><span>Lessons completed</span><strong>3</strong></div>
+                <div><span>Answer drafts</span><strong>1</strong></div>
+                <div><span>Revision sessions</span><strong>2</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <p class="dashboard-note">This is a demo dashboard. Once login + payments are connected, it will show real data.</p>
+        </section>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <p>© 2025 The Optionalist. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>
