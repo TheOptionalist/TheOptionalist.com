@@ -2,48 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Homo erectus - Anthropology</title>
-  <link rel="stylesheet" href="/assets/styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Homo erectus - Anthropology UPSC</title>
+  <link rel="stylesheet" href="../../styles.css" />
+<script>
+  function toggleTheme() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    localStorage.setItem("theme", body.classList.contains("dark-mode") ? "dark" : "light");
+  }
+
+  window.onload = () => {
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+    }
+  };
+</script>
 </head>
+<body class="light-mode">
 <body>
-  <div class="site">
-    <header class="site-header">
-      <div class="brand">
-        <h1>The Optionalist</h1>
-        <span>Scholarship by Choice</span>
-      </div>
-      <nav class="nav-links">
-        <a href="/anthropology/">Anthropology</a>
-        <a href="/psir/">PSIR</a>
-        <a href="/blogs/">Blogs</a>
-        <a href="/stories/">Stories</a>
-        <a class="nav-cta" href="/">Home</a>
-      </nav>
-    </header>
-    <main class="site-main">
-      <div class="container">
-        <section class="study-panel">
-  <div class="study-head">
-    <h2>Homo erectus: Revision Snapshot</h2>
-    <p>A compact guide to the first global hominin, its anatomy, tools, and migratory significance.</p>
-  </div>
-  <div class="study-grid">
-    <div class="study-card">
-      <h3>Key Points</h3>
-      <ul class="list"><li>Time range: about 1.9 million to 110,000 years ago.</li><li>Key trait: increased cranial capacity and thick cranial bones.</li><li>Acheulean tools define technological advance over Oldowan.</li><li>First consistent out-of-Africa dispersal across Asia and Europe.</li><li>Evidence of fire use and increased social coordination.</li></ul>
-    </div>
-    <div class="study-card">
-      <h3>Exam Prompts</h3>
-      <ul class="list"><li>Explain the significance of Acheulean tools for Homo erectus.</li><li>Assess how Homo erectus differed from Homo habilis.</li><li>Discuss the evidence for out-of-Africa migration.</li></ul>
-    </div>
-    <div class="study-card">
-      <h3>Glossary</h3>
-      <ul class="list"><li><strong>Acheulean:</strong> Bifacial hand-axe tool tradition.</li><li><strong>Cranial capacity:</strong> Approximate brain volume of a species.</li><li><strong>Turkana Boy:</strong> KNM-WT 15000, key Homo erectus fossil.</li></ul>
-    </div>
-  </div>
-</section><article class="article-container">
+  <div id="header-placeholder"></div>
+
+  <!-- Your page content here -->
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    // Load header.html
+    fetch('/header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+      });
+
+    // Load footer.html
+    fetch('/footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      });
+  </script>
+</body>
+  <article class="article-container">
     <header>
       <h1>Homo erectus</h1>
       <p class="meta">By The Optionalist | May 2025 | Tags: Anthropology, Human Evolution, UPSC CSE</p>
@@ -400,7 +400,7 @@
 
     <section>
       <h2>Download PDF</h2>
-      <p><a href="https://theoptionalist.com/Anthropology/UPSC_CSE/Homo erectus.pdf" download>Click here to download the Homo erectus article PDF</a></p>
+      <p><a href="Homo erectus.pdf" download>Click here to download the Homo erectus article PDF</a></p>
     </section>
 
     <footer>
@@ -412,14 +412,33 @@
       </section>
     </footer>
   </article>
-      </div>
-    </main>
-    <footer class="site-footer">
-      <p>© 2025 The Optionalist. All rights reserved.</p>
-    </footer>
-  </div>
-  <script src="/assets/reveal.js"></script>`n</body>
+<!-- Navigation Buttons -->
+<div>
+  <a href="../../index.html" class="btn">Back to Home</a>
+  <a href="../index.html" class="btn">Back to Section</a>
+</div>
+<body>
+  <div id="header-placeholder"></div>
+
+  <!-- Your page content here -->
+
+  <div id="footer-placeholder"></div>
+
+  <script>
+    // Load header.html
+    fetch('/header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('header-placeholder').innerHTML = data;
+      });
+
+    // Load footer.html
+    fetch('/footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-placeholder').innerHTML = data;
+      });
+  </script>
+</body>
+</body>
 </html>
-
-
-

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anthropology - UGC NET</title>
+  <link rel="stylesheet" href="../../styles.css" />
+<script>
+  function toggleTheme() {
+    const body = document.body;
+    body.classList.toggle("dark-mode");
+    localStorage.setItem("theme", body.classList.contains("dark-mode") ? "dark" : "light");
+  }
+
+  window.onload = () => {
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+    }
+  };
+</script>
+</head>
+<body>
+  <header>
+    <h1>Anthropology - UGC NET</h1>
+    <p>Articles and resources for UGC NET preparation</p>
+  </header>
+
+  <main>
+    <p>This section is under construction. Articles coming soon.</p>
+  </main>
+
+  <footer>
+    <p><a href="../../index.html">Back to Home</a></p>
+  </footer>
+</body>
+</html>

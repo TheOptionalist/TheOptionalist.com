@@ -1,23 +1,29 @@
 ﻿import type { Metadata } from "next";
 import "./globals.css";
-import { Fraunces, Sora } from "next/font/google";
+import { Source_Serif_4, Public_Sans } from "next/font/google";
 import Link from "next/link";
+import RevealOnScroll from "@/components/RevealOnScroll";
 
-const fraunces = Fraunces({
+const fraunces = Source_Serif_4({
   subsets: ["latin"],
   variable: "--font-display",
-  weight: ["400", "600", "700"]
+  weight: ["400", "500", "600", "700"]
 });
 
-const sora = Sora({
+const sora = Public_Sans({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["300", "400", "500", "600"]
+  weight: ["300", "400", "500", "600", "700"]
 });
 
 export const metadata: Metadata = {
   title: "The Optionalist",
   description: "Explore UPSC, UGC NET, and Ivy League-level content in Anthropology and PSIR."
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1
 };
 
 export default function RootLayout({
@@ -39,6 +45,9 @@ export default function RootLayout({
               <Link href="/psir">PSIR</Link>
               <Link href="/blogs">Blogs</Link>
               <Link href="/stories">Stories</Link>
+              <Link href="/account">Account</Link>
+              <Link href="/dashboard">Dashboard</Link>
+              <Link href="/login">Login</Link>
               <Link className="nav-cta" href="/">Home</Link>
             </nav>
           </header>
@@ -49,6 +58,7 @@ export default function RootLayout({
             <p>Built to keep learning optional, rigorous, and joyful.</p>
           </footer>
         </div>
+        <RevealOnScroll />
       </body>
     </html>
   );

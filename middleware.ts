@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { isAdminCookieValid } from "./src/lib/adminAuth";
 
 const redirects: Record<string, string> = {
   "/index.html": "/",
@@ -18,6 +19,30 @@ const redirects: Record<string, string> = {
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const isAdminRoute = pathname.startsWith("/admin");
+  const isAdminApiRoute = pathname.startsWith("/api/admin");
+
+  if (isAdminRoute || isAdminApiRoute) {
+    const isLoginRoute = pathname === "/admin/login";
+    const isAuthRoute =
+      pathname === "/api/admin/login" || pathname === "/api/admin/logout";
+    const cookie = request.cookies.get("admin_auth")?.value;
+    const isValid = isAdminCookieValid(cookie);
+
+    if (!isValid) {
+      if (isAdminApiRoute && !isAuthRoute) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      }
+
+      if (isAdminRoute && !isLoginRoute) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/admin/login";
+        url.searchParams.set("error", "1");
+        return NextResponse.redirect(url);
+      }
+    }
+  }
+
   const target = redirects[pathname];
   if (target) {
     const url = request.nextUrl.clone();
@@ -29,6 +54,9 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    "/admin",
+    "/admin/:path*",
+    "/api/admin/:path*",
     "/index.html",
     "/Anthropology/:path*",
     "/PSIR/:path*",
