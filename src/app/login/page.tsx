@@ -1,9 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword
+} from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { auth, db } from "@/lib/firebaseClient";
 
@@ -28,7 +32,7 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const createSession = async (token: string) => {
+  const createSession = useCallback(async (token: string) => {
     const response = await fetch("/api/auth/session", {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` }
@@ -37,7 +41,23 @@ export default function LoginPage() {
     if (!response.ok) {
       throw new Error("Could not start a session. Please try again.");
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (!user) return;
+      try {
+        const token = await user.getIdToken();
+        await createSession(token);
+        router.replace("/account");
+        router.refresh();
+      } catch {
+        // Ignore auto-redirect if session sync fails.
+      }
+    });
+
+    return () => unsubscribe();
+  }, [createSession, router]);
 
   const onChange = (field: keyof FormState) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {

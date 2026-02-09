@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { getFirebaseAdmin } from "@/lib/firebaseAdmin";
 
 const SESSION_COOKIE_NAME = "session";
-const SESSION_EXPIRES_IN_MS = 1000 * 60 * 60 * 24 * 5; // 5 days
+// Firebase session cookies allow up to 14 days.
+const SESSION_EXPIRES_IN_MS = 1000 * 60 * 60 * 24 * 14;
 
 export async function POST(request: Request) {
   const authorization = request.headers.get("authorization") ?? "";

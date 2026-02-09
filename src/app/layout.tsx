@@ -3,6 +3,7 @@ import "./globals.css";
 import { Source_Serif_4, Public_Sans } from "next/font/google";
 import Link from "next/link";
 import RevealOnScroll from "@/components/RevealOnScroll";
+import AuthSessionSync from "@/components/AuthSessionSync";
 
 const fraunces = Source_Serif_4({
   subsets: ["latin"],
@@ -59,6 +60,7 @@ export default function RootLayout({
           </footer>
         </div>
         <RevealOnScroll />
+        <AuthSessionSync />
       </body>
     </html>
   );

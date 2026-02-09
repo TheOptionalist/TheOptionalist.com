@@ -9,12 +9,14 @@
   --sea: #b77e3d;
   --paper: #272727;
   --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+  --accent-glow: 0 18px 40px rgba(212, 63, 58, 0.25);
   --radius-lg: 28px;
   --radius-md: 18px;
   --radius-sm: 12px;
   --max-width: 1200px;
   --font-body: var(--font-body, "Public Sans", sans-serif);
   --font-display: var(--font-display, "Source Serif 4", serif);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * {
@@ -110,7 +112,7 @@ img {
   font-weight: 600;
   padding: 8px 14px;
   border-radius: 999px;
-  transition: all 0.3s ease;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease), color 0.3s var(--ease);
   border: 1px solid transparent;
 }
 
@@ -191,9 +193,15 @@ img {
   font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.08);
-  transition: all 0.3s ease;
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease),
+    background 0.2s var(--ease),
+    border-color 0.2s var(--ease),
+    color 0.2s var(--ease);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  position: relative;
 }
 
 .button.primary {
@@ -206,6 +214,29 @@ img {
 .button:focus {
   transform: translateY(-2px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+.button:focus-visible {
+  outline: 2px solid rgba(240, 179, 106, 0.55);
+  outline-offset: 2px;
+}
+
+.button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.button.primary:hover,
+.button.primary:focus {
+  box-shadow: var(--accent-glow);
+}
+
+.button[disabled],
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+  box-shadow: none;
 }
 
 .grid {
@@ -758,6 +789,18 @@ img {
   background: rgba(255, 255, 255, 0.08);
   font-size: 1rem;
   color: var(--ink);
+  transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+}
+
+.auth-card input::placeholder {
+  color: rgba(242, 240, 234, 0.45);
+}
+
+.auth-card input:focus-visible,
+.admin-form input:focus-visible {
+  outline: none;
+  border-color: rgba(240, 179, 106, 0.6);
+  box-shadow: 0 0 0 3px rgba(240, 179, 106, 0.2);
 }
 
 .auth-error {
