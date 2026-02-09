@@ -1,29 +1,24 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { createSupabaseServerClient } from "@/lib/supabaseServer";
+import SignOutButton from "@/components/SignOutButton";
+import { formatDate } from "@/lib/formatDate";
+import { getProfileByUid, getServerSession } from "@/lib/firebaseServer";
 
 export const dynamic = "force-dynamic";
 
 export default async function AccountPage() {
-  const supabase = createSupabaseServerClient();
-  const {
-    data: { user }
-  } = await supabase.auth.getUser();
+  const { user } = await getServerSession();
 
   if (!user) {
     redirect("/login");
   }
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("email, program, course, created_at")
-    .eq("id", user.id)
-    .maybeSingle();
+  const { profile } = await getProfileByUid(user.uid);
 
-  const email = profile?.email ?? user.email ?? "—";
-  const program = profile?.program ?? "—";
-  const course = profile?.course ?? "—";
-  const joined = profile?.created_at ?? user.created_at ?? "";
+  const email = profile?.email ?? user.email ?? "-";
+  const program = profile?.program ?? "-";
+  const course = profile?.course ?? "-";
+  const joined = formatDate(profile?.createdAt ?? user.auth_time);
 
   return (
     <section className="account-shell">
@@ -39,17 +34,7 @@ export default async function AccountPage() {
           <Link className="button" href="/">
             Back to Home
           </Link>
-          <form
-            action={async () => {
-              "use server";
-              const supabaseServer = createSupabaseServerClient();
-              await supabaseServer.auth.signOut();
-            }}
-          >
-            <button className="button" type="submit">
-              Sign out
-            </button>
-          </form>
+          <SignOutButton className="button" />
         </div>
       </div>
 
@@ -68,12 +53,12 @@ export default async function AccountPage() {
         </div>
         <div className="account-row">
           <span>Joined</span>
-          <strong>{joined ? new Date(joined).toLocaleDateString() : "—"}</strong>
+          <strong>{joined}</strong>
         </div>
       </div>
 
       <p className="account-note">
-        These details come from your Supabase profile record.
+        These details come from your Firebase profile record.
       </p>
     </section>
   );

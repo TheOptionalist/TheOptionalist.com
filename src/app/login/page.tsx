@@ -3,7 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
+import { auth, db } from "@/lib/firebaseClient";
 
 type AuthMode = "signin" | "signup";
 
@@ -16,7 +18,6 @@ type FormState = {
 
 export default function LoginPage() {
   const router = useRouter();
-  const supabase = createClientComponentClient();
   const [mode, setMode] = useState<AuthMode>("signin");
   const [form, setForm] = useState<FormState>({
     email: "",
@@ -26,6 +27,17 @@ export default function LoginPage() {
   });
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const createSession = async (token: string) => {
+    const response = await fetch("/api/auth/session", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if (!response.ok) {
+      throw new Error("Could not start a session. Please try again.");
+    }
+  };
 
   const onChange = (field: keyof FormState) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,43 +51,42 @@ export default function LoginPage() {
 
     try {
       if (mode === "signup") {
-        const { data, error: signUpError } = await supabase.auth.signUp({
-          email: form.email,
-          password: form.password
-        });
+        const credential = await createUserWithEmailAndPassword(
+          auth,
+          form.email,
+          form.password
+        );
+        const user = credential.user;
 
-        if (signUpError) {
-          setError(signUpError.message);
-          setLoading(false);
-          return;
-        }
-
-        const userId = data.user?.id;
-        if (userId) {
-          await supabase.from("profiles").upsert({
-            id: userId,
-            email: form.email,
+        await setDoc(
+          doc(db, "profiles", user.uid),
+          {
+            email: user.email ?? form.email,
             program: form.program || null,
-            course: form.course || null
-          });
-        }
-      } else {
-        const { error: signInError } = await supabase.auth.signInWithPassword({
-          email: form.email,
-          password: form.password
-        });
+            course: form.course || null,
+            createdAt: serverTimestamp()
+          },
+          { merge: true }
+        );
 
-        if (signInError) {
-          setError(signInError.message);
-          setLoading(false);
-          return;
-        }
+        const token = await user.getIdToken();
+        await createSession(token);
+      } else {
+        const credential = await signInWithEmailAndPassword(
+          auth,
+          form.email,
+          form.password
+        );
+        const token = await credential.user.getIdToken();
+        await createSession(token);
       }
 
       router.push("/account");
       router.refresh();
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      const message =
+        err instanceof Error ? err.message : "Something went wrong. Please try again.";
+      setError(message);
     } finally {
       setLoading(false);
     }

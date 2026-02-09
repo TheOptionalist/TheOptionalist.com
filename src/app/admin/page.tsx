@@ -1,24 +1,41 @@
 import Link from "next/link";
-import { supabaseAdmin } from "@/lib/supabaseAdmin";
+import { formatDate } from "@/lib/formatDate";
+import { getFirebaseAdmin } from "@/lib/firebaseAdmin";
 
 export const dynamic = "force-dynamic";
 
 type Profile = {
   id: string;
-  email: string;
-  program: string | null;
-  course: string | null;
-  created_at: string;
+  email?: string;
+  program?: string | null;
+  course?: string | null;
+  createdAt?: unknown;
 };
 
 export default async function AdminPage() {
-  const { data, error } = await supabaseAdmin
-    .from("profiles")
-    .select("id,email,program,course,created_at")
-    .order("created_at", { ascending: false })
-    .limit(200);
+  const { db, error: clientError } = getFirebaseAdmin();
+  let data: Profile[] = [];
+  let error: Error | null = clientError;
 
-  const profiles = (data ?? []) as Profile[];
+  if (db) {
+    try {
+      const snapshot = await db
+        .collection("profiles")
+        .orderBy("createdAt", "desc")
+        .limit(200)
+        .get();
+
+      data = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...(doc.data() as Omit<Profile, "id">)
+      }));
+      error = null;
+    } catch (err) {
+      error = err as Error;
+    }
+  }
+
+  const profiles = data ?? [];
 
   return (
     <section className="admin-shell">
@@ -56,7 +73,7 @@ export default async function AdminPage() {
         </div>
       ) : profiles.length === 0 ? (
         <div className="admin-card">
-          <p>No user data yet. Add rows to the profiles table in Supabase.</p>
+          <p>No user data yet. Add documents to the profiles collection in Firebase.</p>
         </div>
       ) : (
         <div className="admin-table">
@@ -68,10 +85,10 @@ export default async function AdminPage() {
           </div>
           {profiles.map((profile) => (
             <div className="admin-table-row" key={profile.id}>
-              <span>{profile.email}</span>
+              <span>{profile.email ?? "-"}</span>
               <span>{profile.program ?? "-"}</span>
               <span>{profile.course ?? "-"}</span>
-              <span>{new Date(profile.created_at).toLocaleDateString()}</span>
+              <span>{formatDate(profile.createdAt)}</span>
             </div>
           ))}
         </div>
