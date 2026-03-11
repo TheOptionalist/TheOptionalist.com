@@ -30,21 +30,19 @@ const paths = [
 
 const courses = [
   {
-    meta: "Anthropology • UPSC",
+    meta: "Anthropology - UPSC",
     title: "Human Evolution Sprint",
     description:
       "Neanderthals, Homo erectus, and cultural transitions with exam-ready notes.",
     points: ["Quick revision sheets", "PYQ-aligned prompts", "Mini-glossary"],
-    price: "₹299",
     href: "/anthropology"
   },
   {
-    meta: "PSIR • UPSC",
+    meta: "PSIR - UPSC",
     title: "Political Theory Core",
     description:
       "State, sovereignty, liberalism, and comparative answers with crisp models.",
     points: ["Topic briefs", "Answer frameworks", "Weekly plan"],
-    price: "₹299",
     href: "/psir"
   },
   {
@@ -53,7 +51,6 @@ const courses = [
     description:
       "Interdisciplinary readings with exam translation for quick recall.",
     points: ["Critical summaries", "Comparative angles", "Model answers"],
-    price: "₹499",
     href: "/blogs"
   }
 ];
@@ -131,7 +128,6 @@ export default function Home() {
                   <li key={point}>{point}</li>
                 ))}
               </ul>
-              <div className="course-price">{course.price}</div>
               <Link className="button primary" href={course.href}>
                 Enroll Now
               </Link>
