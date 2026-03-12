@@ -495,6 +495,235 @@ img {
   }
 }
 
+@media (max-width: 720px) {
+  body {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .site-header {
+    padding: 18px 5vw 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .brand h1 {
+    font-size: clamp(1.35rem, 1.1rem + 2vw, 1.8rem);
+  }
+
+  .brand span {
+    letter-spacing: 0.1em;
+  }
+
+  .nav-links {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    margin-bottom: -6px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-links a {
+    white-space: nowrap;
+    font-size: 0.88rem;
+    padding: 8px 12px;
+  }
+
+  .site-main {
+    padding: 26px 5vw 64px;
+  }
+
+  .hero {
+    padding: 22px;
+    border-radius: var(--radius-md);
+    gap: 18px;
+  }
+
+  .hero::after {
+    width: 200px;
+    height: 200px;
+    right: -90px;
+    top: -90px;
+    opacity: 0.6;
+  }
+
+  .hero p {
+    font-size: 0.98rem;
+  }
+
+  .grid {
+    gap: 18px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .section-title {
+    margin: 28px 0 14px;
+  }
+
+  .list li {
+    padding: 11px 15px;
+  }
+
+  .article-shell {
+    padding: 26px;
+  }
+
+  .study-panel {
+    padding: 26px;
+  }
+
+  .study-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .article-shell iframe {
+    min-height: 220px;
+  }
+
+  .breadcrumbs {
+    font-size: 0.82rem;
+  }
+
+  .site-footer {
+    padding: 24px 5vw 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .site-header {
+    padding: 14px 4vw 10px;
+    gap: 10px;
+  }
+
+  .brand h1 {
+    font-size: clamp(1.1rem, 0.95rem + 2.4vw, 1.45rem);
+  }
+
+  .brand span {
+    font-size: 0.74rem;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+
+  .nav-links {
+    gap: 10px;
+  }
+
+  .site-main {
+    padding: 18px 4vw 48px;
+  }
+
+  .hero {
+    padding: 16px;
+  }
+
+  .hero::after {
+    width: 170px;
+    height: 170px;
+    right: -80px;
+    top: -80px;
+  }
+
+  .hero h2 {
+    font-size: clamp(1.5rem, 1.15rem + 2.8vw, 1.95rem);
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.2rem, 0.95rem + 1.8vw, 1.55rem);
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+  }
+
+  .list li {
+    padding: 10px 14px;
+  }
+
+  .list a {
+    font-size: 0.9rem;
+  }
+
+  .article-shell {
+    padding: 20px;
+  }
+
+  .study-panel {
+    padding: 20px;
+  }
+
+  .breadcrumbs {
+    gap: 6px;
+  }
+}
+
+@media (max-width: 380px) {
+  body {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .site-header {
+    padding: 12px 4vw 8px;
+  }
+
+  .brand h1 {
+    font-size: 1.15rem;
+  }
+
+  .brand span {
+    font-size: 0.7rem;
+  }
+
+  .nav-links a {
+    font-size: 0.78rem;
+    padding: 6px 9px;
+  }
+
+  .hero {
+    padding: 14px;
+    gap: 14px;
+  }
+
+  .hero h2 {
+    font-size: 1.45rem;
+  }
+
+  .hero p {
+    font-size: 0.86rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  .list li {
+    padding: 8px 12px;
+  }
+}
+
 @keyframes fadeUp {
   from {
     opacity: 0;
@@ -1176,4 +1405,324 @@ img {
 .auth-card input,
 .admin-form input {
   font-size: 16px;
+}
+
+/* Mobile compact overrides (placed last to win cascade) */
+@media (max-width: 600px) {
+  :root {
+    --radius-lg: 16px;
+    --radius-md: 10px;
+    --radius-sm: 8px;
+    --shadow: 0 14px 34px rgba(0, 0, 0, 0.36);
+    --shadow-soft: 0 8px 18px rgba(0, 0, 0, 0.22);
+  }
+
+  body {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  h2 {
+    font-size: 1.05rem;
+  }
+
+  h3 {
+    font-size: 0.98rem;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+
+  .site-header {
+    padding: 10px 4vw 8px;
+    gap: 8px;
+  }
+
+  .nav-links {
+    gap: 8px;
+  }
+
+  .nav-links a {
+    font-size: 0.74rem;
+    padding: 5px 8px;
+  }
+
+  .site-main {
+    padding: 14px 4vw 40px;
+  }
+
+  .hero {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .hero-banner {
+    margin-bottom: 8px;
+    border-radius: var(--radius-md);
+    box-shadow: none;
+    background: transparent;
+  }
+
+  .hero-banner img,
+  .hero-banner svg {
+    max-height: 140px;
+    border-radius: var(--radius-md);
+  }
+
+  .hero-banner figcaption {
+    display: none;
+  }
+
+  .hero-actions {
+    gap: 6px;
+  }
+
+  .button {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .courses {
+    margin: 20px 0 16px;
+  }
+
+  .courses-grid {
+    gap: 12px;
+  }
+
+  .course-card {
+    padding: 14px;
+  }
+
+  .course-meta {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+
+  .course-card h3 {
+    font-size: 1.02rem;
+  }
+
+  .course-card p {
+    font-size: 0.82rem;
+  }
+
+  .course-points {
+    padding-left: 12px;
+    font-size: 0.8rem;
+  }
+
+  .user-panel {
+    padding: 14px;
+    gap: 8px;
+    margin: 14px 0;
+  }
+
+  .user-panel-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .user-panel-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .user-panel-kicker {
+    letter-spacing: 0.14em;
+    font-size: 0.58rem;
+  }
+
+  .grid,
+  .dashboard-grid,
+  .notes-grid,
+  .course-list,
+  .payment-list {
+    gap: 12px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .section-title {
+    margin: 16px 0 8px;
+    font-size: 1rem;
+  }
+
+  .section-title::after {
+    width: 42px;
+    height: 3px;
+  }
+
+  .list li {
+    padding: 7px 10px;
+  }
+
+  .list a {
+    font-size: 0.82rem;
+  }
+
+  .floating-cta {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    right: 12px;
+    bottom: 12px;
+  }
+
+  .dashboard-card,
+  .dashboard-panel,
+  .account-card,
+  .auth-panel {
+    padding: 14px;
+  }
+
+  .article-shell,
+  .study-panel {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 12.4px;
+    line-height: 1.4;
+  }
+
+  .site-header {
+    padding: 10px 4vw 8px;
+  }
+
+  .brand h1 {
+    font-size: 1.05rem;
+  }
+
+  .brand span {
+    font-size: 0.62rem;
+  }
+
+  .nav-links a {
+    font-size: 0.7rem;
+    padding: 4px 7px;
+  }
+
+  .hero {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .hero h2 {
+    font-size: 1.18rem;
+  }
+
+  .hero p {
+    font-size: 0.76rem;
+  }
+
+  .section-title {
+    font-size: 0.95rem;
+  }
+
+  .hero-banner {
+    display: none;
+  }
+
+  .hero-banner img,
+  .hero-banner svg {
+    max-height: 120px;
+  }
+}
+
+@media (max-width: 430px) {
+  body {
+    font-size: 12px;
+  }
+
+  .site-main {
+    padding: 12px 4vw 36px;
+  }
+
+  .hero h2 {
+    font-size: 1.08rem;
+  }
+
+  .button {
+    padding: 7px 11px;
+    font-size: 0.76rem;
+  }
+
+  .course-card h3 {
+    font-size: 0.98rem;
+  }
+
+  .section-title {
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 360px) {
+  body {
+    font-size: 11.8px;
+  }
+
+  .brand h1 {
+    font-size: 0.98rem;
+  }
+
+  .nav-links a {
+    font-size: 0.66rem;
+  }
+
+  .hero h2 {
+    font-size: 1.05rem;
+  }
+
+  .hero p {
+    font-size: 0.72rem;
+  }
+
+  .hero-banner img,
+  .hero-banner svg {
+    max-height: 110px;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    font-size: 16.5px;
+  }
+
+  .site-header {
+    padding: 28px 6vw 20px;
+  }
+
+  .site-main {
+    padding: 52px 6vw 90px;
+  }
+
+  .hero {
+    padding: 48px;
+    gap: 28px;
+  }
+
+  .courses {
+    margin: 56px 0 40px;
+  }
+
+  .courses-grid {
+    gap: 28px;
+  }
+
+  .card,
+  .course-card,
+  .article-shell,
+  .study-panel {
+    padding: 28px;
+  }
 }
