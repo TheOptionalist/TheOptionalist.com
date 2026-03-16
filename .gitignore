@@ -3,3 +3,4 @@ node_modules
 .next
 .vscode
 tsconfig.tsbuildinfo
+assets/firebase-config.js

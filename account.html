@@ -9,19 +9,21 @@
 </head>
 <body>
   <div class="site">
-    <header class="site-header">
+    <header class="site-header" data-menu="closed">
       <div class="brand">
         <h1>The Optionalist</h1>
         <span>Scholarship by Choice</span>
       </div>
-      <nav class="nav-links">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Menu">
+        <span class="menu-icon" aria-hidden="true"></span>
+</button>
+      <nav class="nav-links" id="primary-navigation">
         <a href="/anthropology/">Anthropology</a>
         <a href="/psir/">PSIR</a>
         <a href="/blogs/">Blogs</a>
         <a href="/stories/">Stories</a>
         <a href="/dashboard.html">Dashboard</a>
-        <a class="nav-cta" href="/index.html">Home</a>
-      </nav>
+</nav>
     </header>
     <main class="site-main">
       <div class="container">
@@ -66,23 +68,11 @@
     </footer>
   </div>
 
+  <script src="/assets/firebase-config.js"></script>
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyAm1RKH-5aQaTcplMJvUisWDFutUWd4t8M",
-      authDomain: "the-optionalist.firebaseapp.com",
-      projectId: "the-optionalist",
-      appId: "1:87871181510:web:e3838156528d1c9c1dbdc7",
-      storageBucket: "the-optionalist.firebasestorage.app",
-      messagingSenderId: "87871181510"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const db = getFirestore(app);
 
     const fields = {
       email: document.querySelector('[data-field="email"]'),
@@ -93,6 +83,25 @@
 
     const noteEl = document.getElementById("account-note");
     const signOutBtn = document.getElementById("signout");
+
+    const firebaseConfig = window.__FIREBASE_CONFIG__;
+    const hasConfig =
+      firebaseConfig &&
+      firebaseConfig.apiKey &&
+      firebaseConfig.authDomain &&
+      firebaseConfig.projectId;
+
+    if (!hasConfig) {
+      const message = "Firebase config missing. Add /assets/firebase-config.js before using this page.";
+      if (noteEl) {
+        noteEl.textContent = message;
+      }
+      throw new Error(message);
+    }
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
     const formatDate = (value) => {
       if (!value) return "-";
@@ -150,5 +159,6 @@
       window.location.href = "/login.html";
     });
   </script>
+  <script src="/assets/menu.js" defer></script>
 </body>
 </html>

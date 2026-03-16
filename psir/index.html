@@ -9,18 +9,20 @@
 </head>
 <body>
   <div class="site">
-    <header class="site-header">
+    <header class="site-header" data-menu="closed">
       <div class="brand">
         <h1>The Optionalist</h1>
         <span>Scholarship by Choice</span>
       </div>
-      <nav class="nav-links">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Menu">
+        <span class="menu-icon" aria-hidden="true"></span>
+</button>
+      <nav class="nav-links" id="primary-navigation">
         <a href="/anthropology/">Anthropology</a>
         <a href="/psir/">PSIR</a>
         <a href="/blogs/">Blogs</a>
         <a href="/stories/">Stories</a>
-        <a class="nav-cta" href="/">Home</a>
-      </nav>
+</nav>
     </header>
     <main class="site-main">
       <div class="container">
@@ -53,19 +55,14 @@
     <a class="button" href="/psir/ivy-leagues/introduction/">Ivy Leagues: Liberal Theory</a>
   </div>
 </section>
-<h3 class="section-title">Modules</h3>
-<ul class="list">
-  <li><a href="/psir/upsc-cse/introduction/">UPSC CSE - Liberal Theory of State</a></li>
-  <li><a href="/psir/ugc-net/introduction/">UGC NET - Liberal Theory of State</a></li>
-  <li><a href="/psir/ivy-leagues/introduction/">Ivy Leagues - Liberal Theory of State</a></li>
-</ul>
       </div>
     </main>
     <footer class="site-footer">
       <p>© 2025 The Optionalist. All rights reserved.</p>
     </footer>
   </div>
-  <script src="/assets/reveal.js"></script>`n</body>
+  <script src="/assets/reveal.js"></script>
+  <script src="/assets/menu.js" defer></script>
+</body>
 </html>
-
 

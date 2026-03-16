@@ -9,18 +9,20 @@
 </head>
 <body>
   <div class="site">
-    <header class="site-header">
+    <header class="site-header" data-menu="closed">
       <div class="brand">
         <h1>The Optionalist</h1>
         <span>Scholarship by Choice</span>
       </div>
-      <nav class="nav-links">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Menu">
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
+      <nav class="nav-links" id="primary-navigation">
         <a href="/anthropology/">Anthropology</a>
         <a href="/psir/">PSIR</a>
         <a href="/blogs/">Blogs</a>
         <a href="/stories/">Stories</a>
-        <a class="nav-cta" href="/">Home</a>
-      </nav>
+</nav>
     </header>
     <main class="site-main">
       <div class="container">
@@ -43,8 +45,9 @@
       <ul class="list"><li><strong>Levallois:</strong> Prepared-core flaking technique.</li><li><strong>Mousterian:</strong> Middle Paleolithic tool industry.</li><li><strong>Bergmann's Rule:</strong> Body size increases in colder climates.</li></ul>
     </div>
   </div>
-</section><main>
-        <section id="article">
+</section>
+
+        <section id="article" class="article-shell">
             <h2>Introduction to Neanderthals</h2>
             <h1><strong>Neanderthal Man</strong></h1>
 <h2><strong>Geological History of Earth: From Origin to Late Pleistocene</strong></h2>
@@ -597,18 +600,20 @@
 <p><span style="font-weight: 400;">Any amount is appreciated. Thank you for your support.</span></p>
         </section>
 
-        <section id="video">
+        <section id="video" class="article-shell">
             <h3>Watch the Neanderthal Documentary</h3>
             <iframe width="560" height="315" src="https://www.youtube.com/embed/UTY-H_TiOZY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </section>
-    </main>
+    
       </div>
     </main>
     <footer class="site-footer">
       <p>© 2025 The Optionalist. All rights reserved.</p>
     </footer>
   </div>
-  <script src="/assets/reveal.js"></script>`n</body>
+  <script src="/assets/reveal.js"></script>
+  <script src="/assets/menu.js" defer></script>
+</body>
 </html>
 
 

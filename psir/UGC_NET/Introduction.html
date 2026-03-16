@@ -9,18 +9,20 @@
 </head>
 <body>
   <div class="site">
-    <header class="site-header">
+    <header class="site-header" data-menu="closed">
       <div class="brand">
         <h1>The Optionalist</h1>
         <span>Scholarship by Choice</span>
       </div>
-      <nav class="nav-links">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Menu">
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
+      <nav class="nav-links" id="primary-navigation">
         <a href="/anthropology/">Anthropology</a>
         <a href="/psir/">PSIR</a>
         <a href="/blogs/">Blogs</a>
         <a href="/stories/">Stories</a>
-        <a class="nav-cta" href="/">Home</a>
-      </nav>
+</nav>
     </header>
     <main class="site-main">
       <div class="container">
@@ -43,7 +45,9 @@
       <ul class="list"><li><strong>Social contract:</strong> Authority based on consent of the governed.</li><li><strong>Separation of powers:</strong> Executive, legislature, judiciary are distinct.</li><li><strong>Welfare liberalism:</strong> State ensures social and economic rights.</li></ul>
     </div>
   </div>
-</section><article class="article-container">
+</section>
+<section class="article-shell">
+  <article>
     <header>
       <h1>The Liberal Theory of the State</h1>
       <p class="meta">By The Optionalist | May 2025 | Tags: PSIR, Political Science, IR, UPSC, UGC NET</p>
@@ -257,13 +261,16 @@
       </section>
     </footer>
   </article>
+</section>
       </div>
     </main>
     <footer class="site-footer">
       <p>© 2025 The Optionalist. All rights reserved.</p>
     </footer>
   </div>
-  <script src="/assets/reveal.js"></script>`n</body>
+  <script src="/assets/reveal.js"></script>
+  <script src="/assets/menu.js" defer></script>
+</body>
 </html>
 
 
