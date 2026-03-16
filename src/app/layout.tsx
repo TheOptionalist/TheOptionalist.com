@@ -2,6 +2,7 @@
 import "./globals.css";
 import { Source_Serif_4, Public_Sans } from "next/font/google";
 import Link from "next/link";
+import Script from "next/script";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import AuthSessionSync from "@/components/AuthSessionSync";
 
@@ -36,12 +37,21 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${sora.variable} ${fraunces.variable}`}>
         <div className="site">
-          <header className="site-header">
+          <header className="site-header" data-menu="closed">
             <div className="brand">
               <h1>The Optionalist</h1>
               <span>Scholarship by Choice</span>
             </div>
-            <nav className="nav-links">
+            <button
+              className="menu-toggle"
+              type="button"
+              aria-expanded="false"
+              aria-controls="primary-navigation"
+              aria-label="Menu"
+            >
+              <span className="menu-icon" aria-hidden="true"></span>
+            </button>
+            <nav className="nav-links" id="primary-navigation">
               <Link href="/anthropology">Anthropology</Link>
               <Link href="/psir">PSIR</Link>
               <Link href="/blogs">Blogs</Link>
@@ -49,7 +59,6 @@ export default function RootLayout({
               <Link href="/account">Account</Link>
               <Link href="/dashboard">Dashboard</Link>
               <Link href="/login">Login</Link>
-              <Link className="nav-cta" href="/">Home</Link>
             </nav>
           </header>
           <main className="site-main">
@@ -61,6 +70,7 @@ export default function RootLayout({
         </div>
         <RevealOnScroll />
         <AuthSessionSync />
+        <Script src="/menu.js" strategy="afterInteractive" />
       </body>
     </html>
   );
