@@ -7,11 +7,13 @@
     "dev": "next dev -p 3000",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sync:drive": "node scripts/sync-drive-content.mjs"
   },
   "dependencies": {
     "firebase": "10.13.2",
     "firebase-admin": "12.6.0",
+    "googleapis": "^171.4.0",
     "next": "^14.2.35",
     "react": "18.2.0",
     "react-dom": "18.2.0"

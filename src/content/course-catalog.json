@@ -1,0 +1,57 @@
+[
+  {
+    "slug": "anthropology-upsc-neanderthal",
+    "title": "Neanderthal Man",
+    "subject": "Anthropology",
+    "track": "UPSC CSE",
+    "description": "Revision-friendly notes on Neanderthals with concept support and exam utility.",
+    "order": 10,
+    "status": "published",
+    "pageSource": "legacy",
+    "href": "/anthropology/upsc-cse/neanderthal"
+  },
+  {
+    "slug": "anthropology-upsc-homo-erectus",
+    "title": "Homo erectus",
+    "subject": "Anthropology",
+    "track": "UPSC CSE",
+    "description": "A clean topic flow through evolution, migration, and comparative understanding.",
+    "order": 20,
+    "status": "published",
+    "pageSource": "legacy",
+    "href": "/anthropology/upsc-cse/homo-erectus"
+  },
+  {
+    "slug": "anthropology-ugc-neanderthal",
+    "title": "Neanderthals",
+    "subject": "Anthropology",
+    "track": "UGC NET",
+    "description": "Anthropology study material arranged for faster revision and better conceptual recall.",
+    "order": 30,
+    "status": "published",
+    "pageSource": "legacy",
+    "href": "/anthropology/ugc-net/neanderthal"
+  },
+  {
+    "slug": "psir-upsc-liberal-theory-of-state",
+    "title": "Liberal Theory of State",
+    "subject": "PSIR",
+    "track": "UPSC CSE",
+    "description": "Political theory material with clearer sequencing and answer-writing relevance.",
+    "order": 40,
+    "status": "published",
+    "pageSource": "legacy",
+    "href": "/psir/upsc-cse/introduction"
+  },
+  {
+    "slug": "psir-ugc-liberal-theory-of-state",
+    "title": "Liberal Theory of State",
+    "subject": "PSIR",
+    "track": "UGC NET",
+    "description": "A student-friendly PSIR lesson built for focused reading and revision.",
+    "order": 50,
+    "status": "published",
+    "pageSource": "legacy",
+    "href": "/psir/ugc-net/introduction"
+  }
+]

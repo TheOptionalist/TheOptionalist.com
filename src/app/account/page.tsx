@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import SignOutButton from "@/components/SignOutButton";
 import { formatDate } from "@/lib/formatDate";
@@ -31,9 +30,6 @@ export default async function AccountPage() {
           </p>
         </div>
         <div className="account-actions">
-          <Link className="button" href="/">
-            Back to Home
-          </Link>
           <SignOutButton className="button" />
         </div>
       </div>

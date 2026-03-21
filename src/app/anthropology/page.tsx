@@ -1,42 +1,131 @@
-﻿import Link from "next/link";
+import Link from "next/link";
+import { getCourseHref, getCoursesBySubject } from "@/lib/courseCatalog";
+
+const supportBlocks = [
+  {
+    title: "Better clarity",
+    description:
+      "Anthropology topics can feel dense, so the material is organized to reduce confusion and help students hold concepts longer."
+  },
+  {
+    title: "Professional presentation",
+    description:
+      "The subject page now looks more like a serious academic resource instead of a plain topic list."
+  },
+  {
+    title: "Student usability",
+    description:
+      "Quick resource cards make it easier to find the right topic without extra clicks."
+  }
+];
 
 export default function AnthropologyPage() {
+  const resources = getCoursesBySubject("Anthropology");
+  const featuredLinks = resources.slice(0, 3);
+
   return (
-    <div>
+    <div className="page-stack">
       <section className="hero">
         <div>
-          <h2>Anthropology</h2>
+          <p className="eyebrow">Anthropology study material</p>
+          <h1>Topic-wise Anthropology notes with a cleaner learning flow.</h1>
           <p>
-            Explore human origins, cultural change, and exam-critical topics across
-            UPSC, UGC NET, and Ivy League-level reading lists.
+            Explore human origins, cultural change, and exam-critical areas through a
+            more user-friendly page structure designed for UPSC and UGC NET students.
           </p>
         </div>
         <div className="hero-actions">
-          <Link className="button primary" href="/anthropology/upsc-cse/neanderthal">
-            UPSC CSE: Neanderthals
+          <Link className="button primary accent" href="/courses/folders/anthropology-upsc-lecture-notes">
+            Anthropology UPSC Course
           </Link>
-          <Link className="button" href="/anthropology/upsc-cse/homo-erectus">
-            UPSC CSE: Homo erectus
+          <Link className="button accent" href="/courses/folders/anthropology-ugc-lecture-notes">
+            Anthropology UGC Course
           </Link>
-          <Link className="button" href="/anthropology/ugc-net/neanderthal">
-            UGC NET: Neanderthals
-          </Link>
+          {featuredLinks.map((resource, index) => (
+            <Link
+              className={`button ${index === 0 ? "primary" : ""}`}
+              href={getCourseHref(resource)}
+              key={resource.slug}
+            >
+              {resource.track}: {resource.title}
+            </Link>
+          ))}
+        </div>
+        <div className="hero-highlights" aria-label="Highlights">
+          <span>Human evolution</span>
+          <span>Exam focus</span>
+          <span>Easy scanning</span>
+          <span>Study ready</span>
         </div>
       </section>
 
-      <h3 className="section-title">Modules</h3>
-      <ul className="list">
-        <li>
-          <Link href="/anthropology/upsc-cse/neanderthal">UPSC CSE - Neanderthals</Link>
-        </li>
-        <li>
-          <Link href="/anthropology/upsc-cse/homo-erectus">UPSC CSE - Homo erectus</Link>
-        </li>
-        <li>
-          <Link href="/anthropology/ugc-net/neanderthal">UGC NET - Neanderthals</Link>
-        </li>
-        <li>Ivy Leagues - Neanderthals (Coming soon)</li>
-      </ul>
+      <section>
+        <div className="section-intro">
+          <div>
+            <p className="eyebrow">Available resources</p>
+            <h2 className="section-title">Open the Anthropology topic you want to study.</h2>
+          </div>
+          <p className="section-copy">
+            Published Anthropology lessons from the site catalog appear here
+            automatically, including future Drive-synced courses.
+          </p>
+        </div>
+
+        <div className="resource-grid">
+          <article className="resource-card">
+            <p className="resource-meta">Anthropology UPSC</p>
+            <h3>Full lecture-note folder</h3>
+            <p>
+              Theory, Indian anthropology, biological anthropology, aur prehistory ko
+              module-wise arrange karke ek complete UPSC folder ready hai.
+            </p>
+            <Link className="button primary accent" href="/courses/folders/anthropology-upsc-lecture-notes">
+              Open Folder
+            </Link>
+          </article>
+
+          <article className="resource-card">
+            <p className="resource-meta">Anthropology UGC</p>
+            <h3>UGC lecture-note folder</h3>
+            <p>
+              Human evolution, genetics, population variation, aur growth topics ko
+              module-wise organize karke UGC flow ready kiya gaya hai.
+            </p>
+            <Link className="button accent" href="/courses/folders/anthropology-ugc-lecture-notes">
+              Open Folder
+            </Link>
+          </article>
+
+          {resources.map((resource) => (
+            <article className="resource-card" key={resource.slug}>
+              <p className="resource-meta">{resource.track}</p>
+              <h3>{resource.title}</h3>
+              <p>{resource.description}</p>
+              <Link className="button primary" href={getCourseHref(resource)}>
+                Open Material
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <div className="section-intro">
+          <div>
+            <p className="eyebrow">Why this is easier to use</p>
+            <h2 className="section-title">A more professional page for serious study.</h2>
+          </div>
+        </div>
+
+        <div className="feature-grid">
+          {supportBlocks.map((block) => (
+            <article className="feature-card" key={block.title}>
+              <h3>{block.title}</h3>
+              <p>{block.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

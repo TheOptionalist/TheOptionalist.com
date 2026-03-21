@@ -1,21 +1,21 @@
-﻿import type { Metadata } from "next";
-import "./globals.css";
-import { Source_Serif_4, Public_Sans } from "next/font/google";
+import type { Metadata } from "next";
+import { Manrope, Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
 import Script from "next/script";
-import RevealOnScroll from "@/components/RevealOnScroll";
 import AuthSessionSync from "@/components/AuthSessionSync";
+import RevealOnScroll from "@/components/RevealOnScroll";
+import "./globals.css";
 
-const fraunces = Source_Serif_4({
+const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
   variable: "--font-display",
   weight: ["400", "500", "600", "700"]
 });
 
-const sora = Public_Sans({
+const manrope = Manrope({
   subsets: ["latin"],
   variable: "--font-body",
-  weight: ["300", "400", "500", "600", "700"]
+  weight: ["400", "500", "600", "700", "800"]
 });
 
 export const metadata: Metadata = {
@@ -35,37 +35,50 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${sora.variable} ${fraunces.variable}`}>
+      <body className={`${manrope.variable} ${sourceSerif.variable}`}>
         <div className="site">
           <header className="site-header" data-menu="closed">
-            <div className="brand">
-              <h1>The Optionalist</h1>
-              <span>Scholarship by Choice</span>
+            <div className="site-header-inner">
+              <Link className="brand" href="/">
+                <span className="brand-mark" aria-hidden="true">
+                  TO
+                </span>
+                <span className="brand-copy">
+                  <span className="brand-title">The Optionalist</span>
+                  <span>Scholarship by Choice</span>
+                </span>
+              </Link>
+              <nav className="nav-links" id="primary-navigation">
+                <Link href="/">Home</Link>
+                <Link href="/courses">Courses</Link>
+                <Link href="/anthropology">Anthropology</Link>
+                <Link href="/psir">PSIR</Link>
+                <Link href="/blogs">Blogs</Link>
+                <Link href="/stories">Stories</Link>
+                <Link href="/account">Account</Link>
+                <Link href="/dashboard">Dashboard</Link>
+                <Link href="/login">Login</Link>
+              </nav>
             </div>
-            <button
-              className="menu-toggle"
-              type="button"
-              aria-expanded="false"
-              aria-controls="primary-navigation"
-              aria-label="Menu"
-            >
-              <span className="menu-icon" aria-hidden="true"></span>
-            </button>
-            <nav className="nav-links" id="primary-navigation">
-              <Link href="/anthropology">Anthropology</Link>
-              <Link href="/psir">PSIR</Link>
-              <Link href="/blogs">Blogs</Link>
-              <Link href="/stories">Stories</Link>
-              <Link href="/account">Account</Link>
-              <Link href="/dashboard">Dashboard</Link>
-              <Link href="/login">Login</Link>
-            </nav>
           </header>
           <main className="site-main">
             <div className="container">{children}</div>
           </main>
           <footer className="site-footer">
-            <p>Built to keep learning optional, rigorous, and joyful.</p>
+            <div className="container footer-grid">
+              <div>
+                <p className="footer-kicker">The Optionalist</p>
+                <p>Exam-aligned scholarship for Anthropology, PSIR, and deep readers.</p>
+              </div>
+              <div className="footer-links">
+                <Link href="/">Home</Link>
+                <Link href="/courses">Courses</Link>
+                <Link href="/anthropology">Anthropology</Link>
+                <Link href="/psir">PSIR</Link>
+                <Link href="/blogs">Blogs</Link>
+                <Link href="/login">Account Access</Link>
+              </div>
+            </div>
           </footer>
         </div>
         <RevealOnScroll />
