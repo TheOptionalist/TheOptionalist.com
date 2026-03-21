@@ -1,6 +1,29 @@
+# Local environment
+.env
 .env.local
-node_modules
-.next
-.vscode
-tsconfig.tsbuildinfo
+.env.development.local
+.env.production.local
+.env.test.local
 assets/firebase-config.js
+
+# Dependencies
+node_modules/
+
+# Build output
+.next/
+out/
+dist/
+coverage/
+tsconfig.tsbuildinfo
+
+# Editor settings
+.vscode/
+.idea/
+
+# Logs and system files
+*.log
+.DS_Store
+Thumbs.db
+
+# Deployment metadata
+.vercel/
