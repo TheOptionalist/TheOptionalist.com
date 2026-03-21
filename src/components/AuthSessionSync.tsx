@@ -11,6 +11,10 @@ export default function AuthSessionSync() {
   const lastSyncAt = useRef(0);
 
   useEffect(() => {
+    if (!auth) {
+      return;
+    }
+
     setPersistence(auth, browserLocalPersistence).catch(() => {});
 
     const unsubscribe = onIdTokenChanged(auth, async (user) => {

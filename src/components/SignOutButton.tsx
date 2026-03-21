@@ -18,7 +18,9 @@ export default function SignOutButton({ className = "button" }: SignOutButtonPro
     setLoading(true);
 
     try {
-      await signOut(auth);
+      if (auth) {
+        await signOut(auth);
+      }
     } catch {
       // Ignore client sign-out errors and still clear the session cookie.
     }

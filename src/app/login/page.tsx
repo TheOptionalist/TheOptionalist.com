@@ -10,7 +10,12 @@ import {
   signInWithEmailAndPassword
 } from "firebase/auth";
 import { doc, serverTimestamp, setDoc } from "firebase/firestore";
-import { auth, db } from "@/lib/firebaseClient";
+import {
+  auth,
+  db,
+  firebaseClientError,
+  isFirebaseClientConfigured
+} from "@/lib/firebaseClient";
 
 type AuthMode = "signin" | "signup" | "reset";
 
@@ -33,6 +38,9 @@ export default function LoginPage() {
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const authUnavailableMessage =
+    firebaseClientError?.message ??
+    "Firebase auth is unavailable. Add the NEXT_PUBLIC_FIREBASE_* variables before deploying.";
 
   const createSession = useCallback(async (token: string) => {
     const response = await fetch("/api/auth/session", {
@@ -46,6 +54,10 @@ export default function LoginPage() {
   }, []);
 
   useEffect(() => {
+    if (!auth) {
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (!user) return;
       try {
@@ -73,6 +85,10 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
+      if (!auth || !db) {
+        throw new Error(authUnavailableMessage);
+      }
+
       if (mode === "signup") {
         const credential = await createUserWithEmailAndPassword(
           auth,
@@ -122,6 +138,10 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
+      if (!auth) {
+        throw new Error(authUnavailableMessage);
+      }
+
       if (!form.email) {
         throw new Error("Please enter your email address.");
       }
@@ -171,11 +191,20 @@ export default function LoginPage() {
 
       <div className="auth-grid">
         <div className="account-card auth-card">
+          {!isFirebaseClientConfigured ? (
+            <p className="auth-error" role="alert">
+              Firebase auth abhi configured nahi hai. Vercel me saare
+              `NEXT_PUBLIC_FIREBASE_*` variables add karo, phir login/signup normal
+              chalega.
+            </p>
+          ) : null}
+
           <div className="auth-tabs">
             <button
               className={`button ${mode === "signin" ? "primary" : ""}`}
               type="button"
               onClick={() => switchMode("signin")}
+              disabled={!auth}
             >
               Sign in
             </button>
@@ -183,6 +212,7 @@ export default function LoginPage() {
               className={`button ${mode === "signup" ? "primary" : ""}`}
               type="button"
               onClick={() => switchMode("signup")}
+              disabled={!auth || !db}
             >
               Sign up
             </button>
@@ -190,6 +220,7 @@ export default function LoginPage() {
               className={`button ${mode === "reset" ? "primary" : ""}`}
               type="button"
               onClick={() => switchMode("reset")}
+              disabled={!auth}
             >
               Reset
             </button>
@@ -203,6 +234,7 @@ export default function LoginPage() {
               value={form.email}
               onChange={onChange("email")}
               required
+              disabled={!auth}
             />
 
             {mode !== "reset" && (
@@ -214,6 +246,7 @@ export default function LoginPage() {
                   value={form.password}
                   onChange={onChange("password")}
                   required
+                  disabled={!auth}
                 />
               </>
             )}
@@ -227,6 +260,7 @@ export default function LoginPage() {
                   value={form.program}
                   onChange={onChange("program")}
                   placeholder="Anthropology"
+                  disabled={!db}
                 />
 
                 <label htmlFor="course">Course</label>
@@ -236,6 +270,7 @@ export default function LoginPage() {
                   value={form.course}
                   onChange={onChange("course")}
                   placeholder="Human Evolution Sprint"
+                  disabled={!db}
                 />
               </>
             )}
@@ -251,7 +286,11 @@ export default function LoginPage() {
               </p>
             )}
 
-            <button className="button primary" type="submit" disabled={loading}>
+            <button
+              className="button primary"
+              type="submit"
+              disabled={loading || !auth || (mode === "signup" && !db)}
+            >
               {loading
                 ? "Please wait..."
                 : mode === "signin"
@@ -285,6 +324,12 @@ export default function LoginPage() {
             <li>Access dashboard progress anytime</li>
             <li>Recover access with reset links</li>
           </ul>
+          {!isFirebaseClientConfigured ? (
+            <p className="auth-error">
+              Deployment note: Vercel me `NEXT_PUBLIC_FIREBASE_*`, `FIREBASE_*`, aur
+              `ADMIN_TOKEN` env vars add karo.
+            </p>
+          ) : null}
         </aside>
       </div>
     </section>
