@@ -4,7 +4,6 @@
 .env.development.local
 .env.production.local
 .env.test.local
-assets/firebase-config.js
 
 # Dependencies
 node_modules/

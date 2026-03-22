@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Manrope, Source_Serif_4 } from "next/font/google";
+import { Public_Sans, Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
-import Script from "next/script";
 import AuthSessionSync from "@/components/AuthSessionSync";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import "./globals.css";
@@ -12,7 +11,7 @@ const sourceSerif = Source_Serif_4({
   weight: ["400", "500", "600", "700"]
 });
 
-const manrope = Manrope({
+const publicSans = Public_Sans({
   subsets: ["latin"],
   variable: "--font-body",
   weight: ["400", "500", "600", "700", "800"]
@@ -35,30 +34,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${sourceSerif.variable}`}>
+      <body className={`${publicSans.variable} ${sourceSerif.variable}`}>
         <div className="site">
-          <header className="site-header" data-menu="closed">
+          <header className="site-header">
             <div className="site-header-inner">
               <Link className="brand" href="/">
-                <span className="brand-mark" aria-hidden="true">
-                  TO
-                </span>
-                <span className="brand-copy">
-                  <span className="brand-title">The Optionalist</span>
-                  <span>Scholarship by Choice</span>
-                </span>
+                <span className="brand-title">The Optionalist</span>
               </Link>
-              <nav className="nav-links" id="primary-navigation">
-                <Link href="/">Home</Link>
-                <Link href="/courses">Courses</Link>
-                <Link href="/anthropology">Anthropology</Link>
-                <Link href="/psir">PSIR</Link>
-                <Link href="/blogs">Blogs</Link>
-                <Link href="/stories">Stories</Link>
-                <Link href="/account">Account</Link>
-                <Link href="/dashboard">Dashboard</Link>
-                <Link href="/login">Login</Link>
-              </nav>
             </div>
           </header>
           <main className="site-main">
@@ -68,22 +50,12 @@ export default function RootLayout({
             <div className="container footer-grid">
               <div>
                 <p className="footer-kicker">The Optionalist</p>
-                <p>Exam-aligned scholarship for Anthropology, PSIR, and deep readers.</p>
-              </div>
-              <div className="footer-links">
-                <Link href="/">Home</Link>
-                <Link href="/courses">Courses</Link>
-                <Link href="/anthropology">Anthropology</Link>
-                <Link href="/psir">PSIR</Link>
-                <Link href="/blogs">Blogs</Link>
-                <Link href="/login">Account Access</Link>
               </div>
             </div>
           </footer>
         </div>
         <RevealOnScroll />
         <AuthSessionSync />
-        <Script src="/menu.js" strategy="afterInteractive" />
       </body>
     </html>
   );

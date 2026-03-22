@@ -119,13 +119,6 @@ export default function CourseFolderPage({
 
             <div className="resource-grid">
               <article className="resource-card">
-                <p className="resource-meta">Web folder path</p>
-                <h3>{folder.title}</h3>
-                <p className="folder-path">{folder.storagePath}</p>
-                <p>Yahan se course ke saare PDFs organized structure me serve ho rahe hain.</p>
-              </article>
-
-              <article className="resource-card">
                 <p className="resource-meta">Available now</p>
                 <h3>{totalAssets} lecture-note PDFs</h3>
                 <p>
@@ -182,19 +175,12 @@ export default function CourseFolderPage({
               <h2 className="section-title">Files for this folder can stay organized here.</h2>
             </div>
             <p className="section-copy">
-              Jab tum PDF ya notes add karoge, is folder path ko use karna easiest
-              rahega, kyunki sab content same track ke andar organized rahega.
+              Jab tum PDF ya notes add karoge, sab content same track ke andar
+              organized rakhna easiest rahega.
             </p>
           </div>
 
           <div className="resource-grid">
-            <article className="resource-card">
-              <p className="resource-meta">Web folder path</p>
-              <h3>{folder.title}</h3>
-              <p className="folder-path">{folder.storagePath}</p>
-              <p>Is path ke andar future PDFs ya course assets daale ja sakte hain.</p>
-            </article>
-
             <article className="resource-card">
               <p className="resource-meta">Recommended workflow</p>
               <h3>Study flow</h3>

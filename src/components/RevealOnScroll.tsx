@@ -10,7 +10,7 @@ export default function RevealOnScroll() {
 
     const targets = Array.from(
       document.querySelectorAll(
-        ".hero, .hero-banner, .study-panel, .article-shell, .card, .list li, iframe, .course-card, .user-panel, .dashboard-panel, .dashboard-card"
+        ".hero, .study-panel, .article-shell, .card, .list li, iframe, .course-card, .user-panel, .dashboard-panel, .dashboard-card"
       )
     );
 

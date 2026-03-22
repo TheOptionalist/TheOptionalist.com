@@ -1,24 +1,6 @@
 import Link from "next/link";
 import { getCourseHref, getCoursesBySubject } from "@/lib/courseCatalog";
 
-const supportBlocks = [
-  {
-    title: "Professional subject page",
-    description:
-      "The PSIR section is framed like a cleaner academic library instead of a plain topic index."
-  },
-  {
-    title: "Student-friendly access",
-    description:
-      "Quick resource cards reduce friction and help students enter the right lesson faster."
-  },
-  {
-    title: "Revision support",
-    description:
-      "The structure is more useful for repeated visits, especially when students return close to exams."
-  }
-];
-
 export default function PsirPage() {
   const resources = getCoursesBySubject("PSIR");
   const featuredLinks = resources.slice(0, 2);
@@ -106,24 +88,6 @@ export default function PsirPage() {
               <Link className="button primary" href={getCourseHref(resource)}>
                 Open Material
               </Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <div className="section-intro">
-          <div>
-            <p className="eyebrow">Why this works better</p>
-            <h2 className="section-title">A more polished PSIR experience for students.</h2>
-          </div>
-        </div>
-
-        <div className="feature-grid">
-          {supportBlocks.map((block) => (
-            <article className="feature-card" key={block.title}>
-              <h3>{block.title}</h3>
-              <p>{block.description}</p>
             </article>
           ))}
         </div>

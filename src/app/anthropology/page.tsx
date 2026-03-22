@@ -1,24 +1,6 @@
 import Link from "next/link";
 import { getCourseHref, getCoursesBySubject } from "@/lib/courseCatalog";
 
-const supportBlocks = [
-  {
-    title: "Better clarity",
-    description:
-      "Anthropology topics can feel dense, so the material is organized to reduce confusion and help students hold concepts longer."
-  },
-  {
-    title: "Professional presentation",
-    description:
-      "The subject page now looks more like a serious academic resource instead of a plain topic list."
-  },
-  {
-    title: "Student usability",
-    description:
-      "Quick resource cards make it easier to find the right topic without extra clicks."
-  }
-];
-
 export default function AnthropologyPage() {
   const resources = getCoursesBySubject("Anthropology");
   const featuredLinks = resources.slice(0, 3);
@@ -104,24 +86,6 @@ export default function AnthropologyPage() {
               <Link className="button primary" href={getCourseHref(resource)}>
                 Open Material
               </Link>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <div className="section-intro">
-          <div>
-            <p className="eyebrow">Why this is easier to use</p>
-            <h2 className="section-title">A more professional page for serious study.</h2>
-          </div>
-        </div>
-
-        <div className="feature-grid">
-          {supportBlocks.map((block) => (
-            <article className="feature-card" key={block.title}>
-              <h3>{block.title}</h3>
-              <p>{block.description}</p>
             </article>
           ))}
         </div>
