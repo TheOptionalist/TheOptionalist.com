@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Public_Sans, Source_Serif_4 } from "next/font/google";
-import Link from "next/link";
 import AuthSessionSync from "@/components/AuthSessionSync";
 import RevealOnScroll from "@/components/RevealOnScroll";
+import SiteHeader from "@/components/SiteHeader";
+import StudyAssistant from "@/components/StudyAssistant";
+import { getSiteSearchItems } from "@/lib/siteSearch";
 import "./globals.css";
 
 const sourceSerif = Source_Serif_4({
@@ -32,16 +34,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const searchItems = getSiteSearchItems();
+
   return (
     <html lang="en">
       <body className={`${publicSans.variable} ${sourceSerif.variable}`}>
         <div className="site">
           <header className="site-header">
-            <div className="site-header-inner">
-              <Link className="brand" href="/">
-                <span className="brand-title">The Optionalist</span>
-              </Link>
-            </div>
+            <SiteHeader searchItems={searchItems} />
           </header>
           <main className="site-main">
             <div className="container">{children}</div>
@@ -56,6 +56,7 @@ export default function RootLayout({
         </div>
         <RevealOnScroll />
         <AuthSessionSync />
+        <StudyAssistant />
       </body>
     </html>
   );

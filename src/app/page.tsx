@@ -81,15 +81,44 @@ const courses = [
 export default function Home() {
   return (
     <div className="home-shell">
-      <section className="hero">
-        <div>
-          <h1>Welcome to The Optionalist</h1>
-          <p>
-            Explore UPSC, UGC NET, and Ivy League-level content in Anthropology and
-            PSIR. The Optionalist is a studio for focused, exam-aligned scholarship
-            that still feels like an invitation to think deeply. Each lesson includes
-            quick summaries, key points, exam prompts, and a mini glossary.
+      <section className="hero home-hero">
+        <div className="home-hero-content">
+          <h1>Think Like a Topper, Not a Memorizer</h1>
+          <p className="home-hero-copy">
+            Focused Anthropology and PSIR notes, lectures, and revision paths for
+            serious UPSC and UGC NET preparation.
           </p>
+          <div className="hero-actions">
+            <Link className="button primary accent hero-cta" href="/courses">
+              Start Learning
+            </Link>
+          </div>
+        </div>
+
+        <div className="home-hero-visual" aria-hidden="true">
+          <div className="home-hero-grid" />
+          <div className="home-hero-orbit home-hero-orbit-outer" />
+          <div className="home-hero-orbit home-hero-orbit-inner" />
+          <div className="home-hero-beam home-hero-beam-a" />
+          <div className="home-hero-beam home-hero-beam-b" />
+          <div className="home-hero-core">
+            <span className="home-hero-core-kicker">Study Engine</span>
+            <strong>Notes, lectures, revision</strong>
+          </div>
+          <div className="home-hero-card home-hero-card-a">
+            <span>Anthropology</span>
+            <strong>Theory to archaeology</strong>
+          </div>
+          <div className="home-hero-card home-hero-card-b">
+            <span>PSIR</span>
+            <strong>Thinkers, state, global order</strong>
+          </div>
+          <div className="home-hero-card home-hero-card-c">
+            <span>UPSC Prelims</span>
+            <strong>Economy and polity flow</strong>
+          </div>
+          <div className="home-hero-pulse home-hero-pulse-a" />
+          <div className="home-hero-pulse home-hero-pulse-b" />
         </div>
       </section>
 
@@ -136,38 +165,6 @@ export default function Home() {
               </Link>
             </article>
           ))}
-        </div>
-      </section>
-
-      <section className="user-panel">
-        <div className="user-panel-icon" aria-hidden="true">
-          <svg viewBox="0 0 48 48" role="img">
-            <path
-              d="M24 24c5.1 0 9.2-4.1 9.2-9.2S29.1 5.6 24 5.6s-9.2 4.1-9.2 9.2S18.9 24 24 24Z"
-              fill="currentColor"
-              opacity="0.7"
-            />
-            <path
-              d="M9.6 40.4c0-6.3 6.5-11.4 14.4-11.4s14.4 5.1 14.4 11.4"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-          </svg>
-        </div>
-        <div>
-          <p className="user-panel-kicker">User Panel</p>
-          <h3>See your account details</h3>
-          <p>View email, program, course, and joined date from your dashboard.</p>
-        </div>
-        <div className="user-panel-actions">
-          <Link className="button primary accent" href="/account">
-            Open Account
-          </Link>
-          <Link className="button" href="/login">
-            Login
-          </Link>
         </div>
       </section>
     </div>

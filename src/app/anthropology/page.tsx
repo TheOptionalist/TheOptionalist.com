@@ -33,12 +33,6 @@ export default function AnthropologyPage() {
             </Link>
           ))}
         </div>
-        <div className="hero-highlights" aria-label="Highlights">
-          <span>Human evolution</span>
-          <span>Exam focus</span>
-          <span>Easy scanning</span>
-          <span>Study ready</span>
-        </div>
       </section>
 
       <section>

@@ -1,10 +1,16 @@
 import Link from "next/link";
 import { getCourseHref, getPublishedCourses } from "@/lib/courseCatalog";
 import { getCourseFolders } from "@/lib/courseFolders";
+import { getVideoCollectionBySlug } from "@/lib/videoLibrary";
 
 export default function CoursesPage() {
   const courses = getPublishedCourses();
   const folders = getCourseFolders();
+  const prelimsFolders = folders.filter((folder) => folder.slug.startsWith("upsc-"));
+  const prelimsVideoTotal = prelimsFolders.reduce(
+    (count, folder) => count + (getVideoCollectionBySlug(folder.slug)?.videos.length ?? 0),
+    0
+  );
 
   return (
     <div className="page-stack">
@@ -20,6 +26,7 @@ export default function CoursesPage() {
         <div className="hero-highlights" aria-label="Course overview">
           <span>{folders.length} study folders</span>
           <span>{courses.length} published lessons</span>
+          <span>{prelimsFolders.length} prelims shelves</span>
           <span>Anthropology</span>
           <span>PSIR</span>
           <span>Sequential module flow</span>
@@ -39,17 +46,51 @@ export default function CoursesPage() {
         </div>
 
         <div className="folder-grid">
-          {folders.map((folder) => (
-            <article className="folder-card" key={folder.slug}>
-              <p className="folder-label">{folder.audience}</p>
-              <h3>{folder.title}</h3>
-              <p>{folder.description}</p>
-              <p className="folder-subtitle">{folder.subtitle}</p>
-              <Link className="button primary" href={`/courses/folders/${folder.slug}`}>
-                Open Folder
-              </Link>
-            </article>
-          ))}
+          {folders.map((folder) => {
+            const videoCollection = getVideoCollectionBySlug(folder.slug);
+
+            return (
+              <article className="folder-card" key={folder.slug}>
+                <p className="folder-label">{folder.audience}</p>
+                <h3>{folder.title}</h3>
+                <p>{folder.description}</p>
+                <p className="folder-subtitle">
+                  {folder.subtitle}
+                  {videoCollection ? ` · ${videoCollection.videos.length} videos` : ""}
+                </p>
+                <Link className="button primary" href={`/courses/folders/${folder.slug}`}>
+                  Open Folder
+                </Link>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+
+      <section>
+        <div className="section-intro">
+          <div>
+            <p className="eyebrow">UPSC prelims</p>
+            <h2 className="section-title">Objective-preparation shelves for economy and polity.</h2>
+          </div>
+          <p className="section-copy">
+            Economy and NCERT polity prelims tracks are grouped separately so objective
+            preparation can stay cleaner without mixing with the main optional folders.
+          </p>
+        </div>
+
+        <div className="resource-grid">
+          <article className="resource-card">
+            <p className="resource-meta">Prelims library</p>
+            <h3>{prelimsFolders.length} prelims folders</h3>
+            <p>
+              Open the prelims section for economy and polity tracks, with {prelimsVideoTotal} aligned
+              lecture videos already available across these shelves.
+            </p>
+            <Link className="button primary" href="/upsc-prelims">
+              Open UPSC Prelims
+            </Link>
+          </article>
         </div>
       </section>
 

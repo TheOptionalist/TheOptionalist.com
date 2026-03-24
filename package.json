@@ -11,7 +11,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sync:drive": "node scripts/sync-drive-content.mjs"
+    "sync:drive": "node scripts/sync-drive-content.mjs",
+    "videos:import": "node scripts/import-youtube-seo-csv.mjs"
   },
   "dependencies": {
     "firebase": "10.13.2",
