@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getFeaturedTestTracks } from "@/lib/testLibrary";
 
 const courses = [
   {
@@ -79,6 +80,8 @@ const courses = [
 ];
 
 export default function Home() {
+  const featuredTestTracks = getFeaturedTestTracks();
+
   return (
     <div className="home-shell">
       <section className="hero home-hero">
@@ -167,6 +170,56 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <section className="courses" aria-labelledby="tests-title">
+        <div className="courses-intro">
+          <div>
+            <p className="section-kicker">Tests</p>
+            <h2 className="section-title" id="tests-title">
+              Add practice rounds to your study flow
+            </h2>
+            <p className="courses-copy">
+              Switch from passive reading to active recall with prelims drills,
+              revision shelves, and subject-focused practice lanes.
+            </p>
+          </div>
+          <Link className="button primary" href="/tests">
+            View All Tests
+          </Link>
+        </div>
+
+        <div className="courses-grid">
+          {featuredTestTracks.map((testTrack) => (
+            <article className="course-card" key={testTrack.title}>
+              <div className="course-card-top">
+                <div className="course-meta">{testTrack.meta}</div>
+                <span className="course-status">{testTrack.status}</span>
+              </div>
+              <h3>{testTrack.title}</h3>
+              <p className="course-summary">{testTrack.summary}</p>
+              <div className="course-facts">
+                <div>
+                  <span>Best for</span>
+                  <strong>{testTrack.bestFor}</strong>
+                </div>
+                <div>
+                  <span>Format</span>
+                  <strong>{testTrack.format}</strong>
+                </div>
+              </div>
+              <ul className="course-points">
+                {testTrack.points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+              <Link className="button primary accent" href={testTrack.href}>
+                {testTrack.ctaLabel}
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+
     </div>
   );
 }

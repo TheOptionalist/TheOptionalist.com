@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { Public_Sans, Source_Serif_4 } from "next/font/google";
 import AuthSessionSync from "@/components/AuthSessionSync";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import SiteHeader from "@/components/SiteHeader";
 import StudyAssistant from "@/components/StudyAssistant";
 import { getSiteSearchItems } from "@/lib/siteSearch";
-import "./globals.css";
 
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
@@ -18,6 +19,11 @@ const publicSans = Public_Sans({
   variable: "--font-body",
   weight: ["400", "500", "600", "700", "800"]
 });
+
+const globalStyles = readFileSync(
+  path.join(process.cwd(), "src/app/globals.css"),
+  "utf8"
+);
 
 export const metadata: Metadata = {
   title: "The Optionalist",
@@ -38,6 +44,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: globalStyles }} />
+      </head>
       <body className={`${publicSans.variable} ${sourceSerif.variable}`}>
         <div className="site">
           <header className="site-header">

@@ -47,6 +47,15 @@ export function getSiteSearchItems(): SiteSearchItem[] {
       keywords: ["upsc prelims", "prelims", "economy", "polity", "objective preparation"]
     },
     {
+      id: "page-tests",
+      title: "Tests",
+      href: "/tests",
+      label: "Page",
+      category: "Navigation",
+      description: "Open test lanes, revision drills, and subject-focused practice sections.",
+      keywords: ["tests", "test section", "practice", "mock", "revision drills", "prelims tests"]
+    },
+    {
       id: "page-anthropology",
       title: "Anthropology",
       href: "/anthropology",

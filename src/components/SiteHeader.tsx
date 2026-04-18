@@ -17,6 +17,7 @@ type SiteHeaderSearchItem = {
 const primaryLinks = [
   { href: "/", label: "Home" },
   { href: "/courses", label: "Courses" },
+  { href: "/tests", label: "Tests" },
   { href: "/upsc-prelims", label: "UPSC Prelims" },
   { href: "/anthropology", label: "Anthropology" },
   { href: "/psir", label: "PSIR" },
@@ -143,7 +144,7 @@ export default function SiteHeader({
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               onFocus={() => setSearchOpen(true)}
-              placeholder="Search courses, prelims, topics"
+              placeholder="Search courses, tests, prelims, topics"
               autoComplete="off"
             />
             {query ? (
