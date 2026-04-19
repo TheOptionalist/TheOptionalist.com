@@ -7,6 +7,7 @@ import RevealOnScroll from "@/components/RevealOnScroll";
 import SiteHeader from "@/components/SiteHeader";
 import StudyAssistant from "@/components/StudyAssistant";
 import { getSiteSearchItems } from "@/lib/siteSearch";
+import "./globals.css";
 
 const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
@@ -20,10 +21,16 @@ const publicSans = Public_Sans({
   weight: ["400", "500", "600", "700", "800"]
 });
 
-const globalStyles = readFileSync(
-  path.join(process.cwd(), "src/app/globals.css"),
-  "utf8"
-);
+let devGlobalStyles = "";
+
+if (process.env.NODE_ENV === "development") {
+  try {
+    // Keep a local fallback for the dev CSS asset issue without breaking production SSR.
+    devGlobalStyles = readFileSync(path.join(process.cwd(), "src/app/globals.css"), "utf8");
+  } catch {
+    devGlobalStyles = "";
+  }
+}
 
 export const metadata: Metadata = {
   title: "The Optionalist",
@@ -45,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <style dangerouslySetInnerHTML={{ __html: globalStyles }} />
+        {devGlobalStyles ? <style dangerouslySetInnerHTML={{ __html: devGlobalStyles }} /> : null}
       </head>
       <body className={`${publicSans.variable} ${sourceSerif.variable}`}>
         <div className="site">
