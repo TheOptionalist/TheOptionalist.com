@@ -18,7 +18,7 @@ export default function TestSectionPage({
   const totalQuestions = papers.reduce((count, paper) => count + paper.questions.length, 0);
 
   return (
-    <div className="page-stack">
+    <div className="page-stack test-page">
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },

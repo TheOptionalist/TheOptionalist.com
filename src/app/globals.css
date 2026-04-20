@@ -1320,6 +1320,12 @@ img {
   gap: 20px;
 }
 
+.test-page h1,
+.test-page h2,
+.test-page h3 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
 .test-score-card {
   gap: 16px;
 }
@@ -1427,6 +1433,7 @@ img {
   margin: 0;
   color: var(--ink);
   font-size: 1.04rem;
+  font-family: "Times New Roman", Times, serif;
   line-height: 1.72;
   font-weight: 600;
   white-space: pre-line;
@@ -1480,6 +1487,7 @@ img {
 
 .test-option-text {
   flex: 1 1 auto;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .test-option-label:hover {
@@ -1500,11 +1508,13 @@ img {
 
 .test-answer-body strong {
   color: var(--ink);
+  font-family: "Times New Roman", Times, serif;
 }
 
 .test-answer-body p {
   margin: 0;
   color: var(--ink-soft);
+  font-family: "Times New Roman", Times, serif;
 }
 
 .path-highlights,

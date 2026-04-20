@@ -52,67 +52,6 @@ export default function TestPaperRunner({
 
   return (
     <div className="test-paper-shell">
-      <article className="resource-card test-score-card">
-        <p className="resource-meta">Test Progress</p>
-        <h3>
-          {submitted
-            ? `Score ${formatScore(finalScore)}/${totalQuestions}`
-            : `Answered ${answeredCount}/${totalQuestions}`}
-        </h3>
-        <p>
-          {submitted
-            ? "Your score is ready. Review the correct answers, deductions, and explanations below."
-            : "Select one option for each question and submit whenever you want to check the score."}
-        </p>
-        <label className="test-toggle">
-          <input
-            checked={negativeMarkingEnabled}
-            onChange={(event) => setNegativeMarkingEnabled(event.target.checked)}
-            type="checkbox"
-          />
-          <span>Enable negative marking practice mode (-0.25 for each wrong answer)</span>
-        </label>
-        <div className="test-score-grid">
-          <div>
-            <span>Answered</span>
-            <strong>{answeredCount}</strong>
-          </div>
-          <div>
-            <span>Correct</span>
-            <strong>{submitted ? correctCount : "-"}</strong>
-          </div>
-          <div>
-            <span>Incorrect</span>
-            <strong>{submitted ? incorrectCount : "-"}</strong>
-          </div>
-          <div>
-            <span>Deduction</span>
-            <strong>{submitted ? formatScore(deduction) : "-"}</strong>
-          </div>
-          <div>
-            <span>Unanswered</span>
-            <strong>{submitted ? unansweredCount : totalQuestions - answeredCount}</strong>
-          </div>
-          <div>
-            <span>Final Score</span>
-            <strong>{submitted ? formatScore(finalScore) : "-"}</strong>
-          </div>
-        </div>
-        <div className="hero-actions">
-          <button
-            className="button primary accent"
-            type="button"
-            onClick={() => setSubmitted(true)}
-            disabled={submitted || answeredCount === 0}
-          >
-            Submit Test
-          </button>
-          <button className="button primary" type="button" onClick={resetTest}>
-            Reset Test
-          </button>
-        </div>
-      </article>
-
       <div className="test-question-list">
         {questions.map((question) => {
           const selectedAnswer = answers[question.id];
@@ -183,6 +122,67 @@ export default function TestPaperRunner({
           );
         })}
       </div>
+
+      <article className="resource-card test-score-card">
+        <p className="resource-meta">Test Progress</p>
+        <h3>
+          {submitted
+            ? `Score ${formatScore(finalScore)}/${totalQuestions}`
+            : `Answered ${answeredCount}/${totalQuestions}`}
+        </h3>
+        <p>
+          {submitted
+            ? "Your score is ready. Review the correct answers, deductions, and explanations above."
+            : "Select one option for each question and submit whenever you want to check the score."}
+        </p>
+        <label className="test-toggle">
+          <input
+            checked={negativeMarkingEnabled}
+            onChange={(event) => setNegativeMarkingEnabled(event.target.checked)}
+            type="checkbox"
+          />
+          <span>Enable negative marking practice mode (-0.25 for each wrong answer)</span>
+        </label>
+        <div className="test-score-grid">
+          <div>
+            <span>Answered</span>
+            <strong>{answeredCount}</strong>
+          </div>
+          <div>
+            <span>Correct</span>
+            <strong>{submitted ? correctCount : "-"}</strong>
+          </div>
+          <div>
+            <span>Incorrect</span>
+            <strong>{submitted ? incorrectCount : "-"}</strong>
+          </div>
+          <div>
+            <span>Deduction</span>
+            <strong>{submitted ? formatScore(deduction) : "-"}</strong>
+          </div>
+          <div>
+            <span>Unanswered</span>
+            <strong>{submitted ? unansweredCount : totalQuestions - answeredCount}</strong>
+          </div>
+          <div>
+            <span>Final Score</span>
+            <strong>{submitted ? formatScore(finalScore) : "-"}</strong>
+          </div>
+        </div>
+        <div className="hero-actions">
+          <button
+            className="button primary accent"
+            type="button"
+            onClick={() => setSubmitted(true)}
+            disabled={submitted || answeredCount === 0}
+          >
+            Submit Test
+          </button>
+          <button className="button primary" type="button" onClick={resetTest}>
+            Reset Test
+          </button>
+        </div>
+      </article>
     </div>
   );
 }

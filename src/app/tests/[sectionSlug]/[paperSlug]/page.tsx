@@ -16,7 +16,7 @@ export default function TestPaperPage({
   }
 
   return (
-    <div className="page-stack">
+    <div className="page-stack test-page">
       <Breadcrumbs
         items={[
           { label: "Home", href: "/" },

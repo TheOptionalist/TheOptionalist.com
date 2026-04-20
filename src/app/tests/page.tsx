@@ -5,7 +5,7 @@ export default function TestsPage() {
   const testSections = getTestSections();
 
   return (
-    <div className="page-stack">
+    <div className="page-stack test-page">
       <section className="hero">
         <div>
           <p className="eyebrow">Tests</p>
