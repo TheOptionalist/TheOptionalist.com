@@ -1,11 +1,11 @@
 ﻿import Article from "@/components/Article";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import StudyPanel from "@/components/StudyPanel";
-import { extractArticle, loadRawHtml, rewriteRelativeLinks } from "@/lib/content";
+import { loadRawHtml, prepareArticleHtml } from "@/lib/content";
 
 const raw = loadRawHtml("PSIR_UPSC_CSE_Introduction.html");
-const html = rewriteRelativeLinks(
-  extractArticle(raw),
+const html = prepareArticleHtml(
+  raw,
   "https://theoptionalist.com/PSIR/UPSC_CSE/"
 );
 

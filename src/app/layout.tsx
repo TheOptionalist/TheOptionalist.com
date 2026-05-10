@@ -33,13 +33,33 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://theoptionalist.com"),
   title: "The Optionalist",
-  description: "Explore UPSC, UGC NET, and Ivy League-level content in Anthropology and PSIR."
+  description: "Explore UPSC, UGC NET, and Ivy League-level content in Anthropology and PSIR.",
+  applicationName: "The Optionalist",
+  category: "education",
+  icons: {
+    icon: [{ url: "/brand-mark.svg", type: "image/svg+xml" }],
+    shortcut: ["/brand-mark.svg"]
+  },
+  openGraph: {
+    title: "The Optionalist",
+    description: "Explore UPSC, UGC NET, and Ivy League-level content in Anthropology and PSIR.",
+    url: "https://theoptionalist.com",
+    siteName: "The Optionalist",
+    type: "website"
+  },
+  twitter: {
+    card: "summary",
+    title: "The Optionalist",
+    description: "Explore UPSC, UGC NET, and Ivy League-level content in Anthropology and PSIR."
+  }
 };
 
 export const viewport = {
   width: "device-width",
-  initialScale: 1
+  initialScale: 1,
+  themeColor: "#1b1f24"
 };
 
 export default function RootLayout({

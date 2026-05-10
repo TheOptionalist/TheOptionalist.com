@@ -110,7 +110,13 @@ export default function SiteHeader({
     <>
       <div className="site-header-inner">
         <Link className="brand" href="/">
-          <span className="brand-title">The Optionalist</span>
+          <span className="brand-mark" aria-hidden="true">
+            <img src="/brand-mark.svg" alt="" />
+          </span>
+          <span className="brand-copy">
+            <span className="brand-kicker">UPSC / UGC NET</span>
+            <span className="brand-title">The Optionalist</span>
+          </span>
         </Link>
 
         <div className="site-header-controls">

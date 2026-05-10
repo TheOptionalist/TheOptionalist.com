@@ -110,17 +110,47 @@ img {
 
 .brand {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
-  gap: 4px;
+  align-items: center;
+  gap: 14px;
   min-width: 0;
   flex: 0 0 auto;
 }
 
+.brand-mark {
+  width: clamp(46px, 4vw, 56px);
+  height: clamp(46px, 4vw, 56px);
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.3));
+}
+
+.brand-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.brand-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.brand-kicker {
+  margin: 0;
+  color: var(--accent-strong);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
 .brand-title {
   font-family: var(--font-display);
-  font-size: clamp(1.4rem, 1.2rem + 1vw, 2rem);
+  font-size: clamp(1.3rem, 1.12rem + 0.9vw, 1.8rem);
   line-height: 1;
   letter-spacing: 0.01em;
 }
@@ -1863,6 +1893,57 @@ img {
   border-radius: var(--radius-sm);
 }
 
+.article-inline-video {
+  display: grid;
+  gap: 16px;
+  margin: 30px 0;
+  padding: clamp(18px, 2.4vw, 24px);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(214, 168, 99, 0.22);
+  background:
+    linear-gradient(180deg, rgba(214, 168, 99, 0.08), rgba(214, 168, 99, 0.02)),
+    rgba(255, 255, 255, 0.03);
+  box-shadow: var(--shadow-soft);
+}
+
+.article-inline-video-copy {
+  display: grid;
+  gap: 10px;
+}
+
+.article-inline-video-copy h2,
+.article-inline-video-copy p,
+.article-inline-video-link {
+  margin: 0;
+}
+
+.article-inline-video-kicker {
+  color: var(--accent-strong);
+  font-size: 0.77rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.article-inline-video-frame {
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: #0c1118;
+  box-shadow: var(--shadow-soft);
+}
+
+.article-inline-video-frame iframe {
+  display: block;
+  width: 100%;
+  border-radius: 0;
+}
+
+.article-inline-video-link a {
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
 .breadcrumbs {
   display: flex;
   flex-wrap: wrap;
@@ -2447,8 +2528,7 @@ img {
   }
 
   .brand {
-    align-items: flex-start;
-    text-align: left;
+    align-items: center;
   }
 
   .site-header-controls {
@@ -2682,8 +2762,12 @@ img {
 }
 
 @media (max-width: 520px) {
+  .brand-kicker {
+    display: none;
+  }
+
   .brand-title {
-    font-size: 1.35rem;
+    font-size: 1.24rem;
   }
 
   .site-search-panel {

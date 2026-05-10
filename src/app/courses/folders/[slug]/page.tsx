@@ -51,26 +51,6 @@ export default function CourseFolderPage({
   if (videos.length > 0) {
     heroHighlights.push(`${videos.length} lecture video${videos.length === 1 ? "" : "s"}`);
   }
-  const flowTitle = isReference
-    ? "Open the revision block you need right now."
-    : "Finish each module before picking the next one.";
-  const flowCopy = isReference
-    ? "Yeh folder fast recall ke liye bana hai, isliye jo revision block chahiye usse directly open karke quick refresh le sakte ho."
-    : "This folder follows the exact approach you asked for: first one module complete karo, uske baad hi next module uthao.";
-  const overviewTitle = hasNotes && hasVideos
-    ? `${folder.title} now combines notes and lectures.`
-    : hasNotes
-      ? isReference
-        ? `${folder.title} is now ready for quick access.`
-        : `${folder.title} is now loaded.`
-      : `${folder.title} lecture track is ready.`;
-  const overviewCopy = hasNotes && hasVideos
-    ? "Same module page par ab PDFs aur matching lectures dono available hain, so students ko notes aur video ke beech jump nahi karna padega."
-    : hasNotes
-      ? isReference
-        ? "Is folder ke andar ab actual revision PDFs available hain, so students quick recall ke liye directly right block open kar sakte hain."
-        : "Is folder ke andar ab actual PDFs available hain, so students can module-wise notes open karke directly study start kar sakte hain."
-      : "Is track me ab module-wise embedded lectures available hain, so students structured order ke saath direct study start kar sakte hain even before PDFs are added.";
   const notesTitle = hasNotes && hasVideos
     ? "Study notes and lectures together, module by module."
     : hasNotes
@@ -119,69 +99,8 @@ export default function CourseFolderPage({
         </div>
       </section>
 
-      <section>
-        <div className="section-intro">
-          <div>
-            <p className="eyebrow">Module order</p>
-            <h2 className="section-title">{flowTitle}</h2>
-          </div>
-          <p className="section-copy">{flowCopy}</p>
-        </div>
-
-        <div className="feature-grid">
-          {modulesWithContent.map((module) => (
-            <article className="feature-card module-card" key={module.order}>
-              <p className="module-order">{module.order}</p>
-              <p className="module-status">{module.status}</p>
-              <h3>{module.title}</h3>
-              <p>{module.description}</p>
-              {module.assets.length > 0 ? (
-                <p className="resource-meta">{module.assets.length} PDFs ready</p>
-              ) : null}
-              {module.videos.length > 0 ? (
-                <p className="resource-meta">{module.videos.length} lecture videos aligned</p>
-              ) : null}
-            </article>
-          ))}
-        </div>
-      </section>
-
       {hasStudyContent ? (
         <>
-          <section>
-            <div className="section-intro">
-              <div>
-                <p className="eyebrow">Folder overview</p>
-                <h2 className="section-title">{overviewTitle}</h2>
-              </div>
-              <p className="section-copy">{overviewCopy}</p>
-            </div>
-
-            <div className="resource-grid">
-              {hasNotes ? (
-                <article className="resource-card">
-                  <p className="resource-meta">Available now</p>
-                  <h3>{totalAssets} lecture-note PDFs</h3>
-                  <p>
-                    Notes ko module-wise arrange karke ready kar diya gaya hai so the
-                    student flow stays cleaner and more usable.
-                  </p>
-                </article>
-              ) : null}
-              {hasVideos ? (
-                <article className="resource-card">
-                  <p className="resource-meta">Lecture support</p>
-                  <h3>{videos.length} lecture video{videos.length === 1 ? "" : "s"}</h3>
-                  <p>
-                    Matching YouTube lectures are now attached inside the relevant
-                    module blocks so students can open the right lecture directly from
-                    the same study flow.
-                  </p>
-                </article>
-              ) : null}
-            </div>
-          </section>
-
           <section>
             <div className="section-intro">
               <div>

@@ -1,11 +1,11 @@
 ﻿import Article from "@/components/Article";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import StudyPanel from "@/components/StudyPanel";
-import { extractArticle, loadRawHtml, rewriteRelativeLinks } from "@/lib/content";
+import { loadRawHtml, prepareArticleHtml } from "@/lib/content";
 
 const raw = loadRawHtml("Anthropology_UGC_NET_Neanderthal.html");
-const html = rewriteRelativeLinks(
-  extractArticle(raw),
+const html = prepareArticleHtml(
+  raw,
   "https://theoptionalist.com/Anthropology/UGC_NET/"
 );
 

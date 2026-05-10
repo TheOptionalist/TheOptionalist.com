@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Article from "@/components/Article";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import StudyPanel from "@/components/StudyPanel";
-import { extractArticle, loadRawHtml, rewriteRelativeLinks } from "@/lib/content";
+import { loadRawHtml, prepareArticleHtml } from "@/lib/content";
 import { getDriveCourseBySlug, getPublishedDriveCourses } from "@/lib/courseCatalog";
 
 export function generateStaticParams() {
@@ -23,10 +23,7 @@ export default function DriveCoursePage({
   }
 
   const raw = loadRawHtml(course.outputFileName);
-  const extractedHtml = extractArticle(raw);
-  const html = course.baseUrl
-    ? rewriteRelativeLinks(extractedHtml, course.baseUrl)
-    : extractedHtml;
+  const html = prepareArticleHtml(raw, course.baseUrl);
 
   return (
     <div>

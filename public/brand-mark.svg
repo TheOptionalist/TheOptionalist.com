@@ -1,0 +1,46 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="panel" x1="20" y1="14" x2="112" y2="120" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#303744"/>
+      <stop offset="0.52" stop-color="#212730"/>
+      <stop offset="1" stop-color="#171B22"/>
+    </linearGradient>
+    <linearGradient id="frame" x1="16" y1="10" x2="112" y2="122" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F1C07A"/>
+      <stop offset="0.52" stop-color="#E0705D"/>
+      <stop offset="1" stop-color="#8DA7C4"/>
+    </linearGradient>
+    <linearGradient id="ring" x1="36" y1="28" x2="90" y2="96" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8DFC0"/>
+      <stop offset="0.45" stop-color="#F1C07A"/>
+      <stop offset="1" stop-color="#E0705D"/>
+    </linearGradient>
+    <linearGradient id="bookmark" x1="64" y1="36" x2="64" y2="79" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF8EE"/>
+      <stop offset="1" stop-color="#F1C07A"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(64 20) rotate(90) scale(84 68)">
+      <stop stop-color="#FFF8EE" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FFF8EE" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="8" y="8" width="112" height="112" rx="30" fill="url(#panel)"/>
+  <rect x="8.75" y="8.75" width="110.5" height="110.5" rx="29.25" stroke="url(#frame)" stroke-opacity="0.42" stroke-width="1.5"/>
+  <path d="M22 18C38 10 90 10 106 18" stroke="url(#glow)" stroke-width="16" stroke-linecap="round"/>
+
+  <circle cx="64" cy="62" r="31" stroke="url(#ring)" stroke-width="6"/>
+
+  <path
+    d="M57 36H71C74.3137 36 77 38.6863 77 42V78.5L64 70.5L51 78.5V42C51 38.6863 53.6863 36 57 36Z"
+    fill="url(#bookmark)"
+  />
+  <path
+    d="M57 36H71C74.3137 36 77 38.6863 77 42V78.5L64 70.5L51 78.5V42C51 38.6863 53.6863 36 57 36Z"
+    stroke="#14181E"
+    stroke-opacity="0.18"
+    stroke-width="1.4"
+  />
+  <path d="M64 43V61" stroke="#1C2128" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round"/>
+  <path d="M45 89C51.2 85.8 57.5333 84.2 64 84.2C70.4667 84.2 76.8 85.8 83 89" stroke="url(#ring)" stroke-width="4" stroke-linecap="round"/>
+</svg>
