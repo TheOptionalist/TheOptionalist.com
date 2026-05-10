@@ -114,7 +114,6 @@ export default function SiteHeader({
             <img src="/brand-mark.svg" alt="" />
           </span>
           <span className="brand-copy">
-            <span className="brand-kicker">UPSC / UGC NET</span>
             <span className="brand-title">The Optionalist</span>
           </span>
         </Link>

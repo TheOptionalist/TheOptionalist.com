@@ -134,18 +134,8 @@ img {
 
 .brand-copy {
   display: grid;
-  gap: 3px;
+  gap: 0;
   min-width: 0;
-}
-
-.brand-kicker {
-  margin: 0;
-  color: var(--accent-strong);
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  line-height: 1;
 }
 
 .brand-title {
@@ -2762,10 +2752,6 @@ img {
 }
 
 @media (max-width: 520px) {
-  .brand-kicker {
-    display: none;
-  }
-
   .brand-title {
     font-size: 1.24rem;
   }
