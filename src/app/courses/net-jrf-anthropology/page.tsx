@@ -20,7 +20,6 @@ export default async function NetJrfAnthropologyPage() {
 
   const { profile } = await getProfileByUid(user.uid);
   const unlockedModuleIds = getUnlockedNetJrfModuleIds(profile);
-  const unlockedCount = unlockedModuleIds.size;
 
   return (
     <div className="page-stack">
@@ -36,17 +35,10 @@ export default async function NetJrfAnthropologyPage() {
         <div>
           <p className="eyebrow">Paid Course</p>
           <h1>{NET_JRF_ANTHROPOLOGY_COURSE.title}</h1>
-          <p>{NET_JRF_ANTHROPOLOGY_COURSE.description}</p>
-        </div>
-        <div className="hero-highlights" aria-label="NET JRF Anthropology overview">
-          <span>7 monthly modules</span>
-          <span>Rs {NET_JRF_ANTHROPOLOGY_COURSE.pricePerModuleInRupees} per module</span>
-          <span>{unlockedCount} unlocked</span>
-          <span>Pay module-by-module</span>
         </div>
       </section>
 
-      <section>
+      <section id="monthly-modules">
         <div className="section-intro">
           <div>
             <p className="eyebrow">Monthly Modules</p>

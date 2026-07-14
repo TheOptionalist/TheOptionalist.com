@@ -31,6 +31,11 @@ Add these in Vercel Project Settings -> Environment Variables for Production, Pr
 - `FIREBASE_PRIVATE_KEY`
 - `ADMIN_TOKEN`
 
+### Razorpay payments
+
+- `RAZORPAY_KEY_ID`
+- `RAZORPAY_KEY_SECRET`
+
 ### Optional Google Drive sync
 
 - `GOOGLE_DRIVE_PROJECT_ID`

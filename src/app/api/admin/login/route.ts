@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { getAdminToken } from "@/lib/adminAuth";
+import { createAdminCookieValue, getAdminToken } from "@/lib/adminAuth";
 
 export async function POST(request: Request) {
   const formData = await request.formData();
@@ -11,13 +10,23 @@ export async function POST(request: Request) {
     return NextResponse.redirect(new URL("/admin/login?error=1", request.url));
   }
 
-  const cookieStore = cookies();
-  cookieStore.set("admin_auth", adminToken, {
+  const response = NextResponse.redirect(new URL("/admin", request.url));
+  const cookieValue = createAdminCookieValue();
+
+  if (!cookieValue) {
+    return NextResponse.json(
+      { error: "Admin session signing is not configured." },
+      { status: 500 }
+    );
+  }
+
+  response.cookies.set("admin_auth", cookieValue, {
     httpOnly: true,
     sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
-    path: "/"
+    path: "/",
+    maxAge: 60 * 60 * 24 * 14
   });
 
-  return NextResponse.redirect(new URL("/admin", request.url));
+  return response;
 }

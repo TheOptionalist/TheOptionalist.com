@@ -755,6 +755,7 @@ img {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 16px;
+  align-items: stretch;
 }
 
 .hero-cta {
@@ -763,6 +764,57 @@ img {
   font-size: 1rem;
   font-weight: 800;
   letter-spacing: 0.01em;
+}
+
+.hero-cta-primary {
+  width: 100%;
+  justify-content: center;
+}
+
+.hero-cta-secondary {
+  align-self: flex-start;
+}
+
+.hero-cta-shell {
+  display: grid;
+  gap: 10px;
+  padding: 16px 16px 14px;
+  border-radius: 24px;
+  border: 1px solid rgba(224, 112, 93, 0.2);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.08) 100%),
+    linear-gradient(135deg, rgba(224, 112, 93, 0.16) 0%, rgba(241, 192, 122, 0.12) 100%);
+  box-shadow: 0 22px 42px rgba(36, 27, 24, 0.14);
+  backdrop-filter: blur(10px);
+  min-width: min(100%, 360px);
+}
+
+.hero-cta-shell .paid-unlock-action {
+  gap: 0;
+}
+
+.hero-cta-badge {
+  margin: 0;
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(224, 112, 93, 0.16);
+  border: 1px solid rgba(224, 112, 93, 0.24);
+  color: var(--accent-strong);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.hero-cta-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
 }
 
 .hero-cta.button.accent {
@@ -2751,6 +2803,11 @@ img {
   .dashboard-actions .button,
   .admin-actions .button,
   .course-card .button {
+    width: 100%;
+  }
+
+  .hero-cta-shell {
+    min-width: 0;
     width: 100%;
   }
 

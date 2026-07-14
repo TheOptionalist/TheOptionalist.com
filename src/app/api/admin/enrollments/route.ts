@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 import { getPublishedCourses } from "@/lib/courseCatalog";
 import { getCourseFolders } from "@/lib/courseFolders";
+import { isAdminCookieValid } from "@/lib/adminAuth";
 import { getFirebaseAdmin } from "@/lib/firebaseAdmin";
 
 function getAllowedCourseSlugs() {
@@ -23,6 +25,12 @@ function parseCourseSlugs(value: FormDataEntryValue | null) {
 }
 
 export async function POST(request: Request) {
+  const adminCookie = cookies().get("admin_auth")?.value;
+
+  if (!isAdminCookieValid(adminCookie)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const formData = await request.formData();
   const uid = formData.get("uid");
   const courseSlugs = parseCourseSlugs(formData.get("courseSlugs"));

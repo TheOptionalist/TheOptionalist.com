@@ -64,7 +64,6 @@ export default async function CoursesPage() {
           <article className="resource-card">
             <p className="resource-meta">Paid Course - Rs 699 per module</p>
             <h3>{NET_JRF_ANTHROPOLOGY_COURSE.title}</h3>
-            <p>{NET_JRF_ANTHROPOLOGY_COURSE.description}</p>
             <Link className="button primary" href="/courses/net-jrf-anthropology">
               Open Course
             </Link>
