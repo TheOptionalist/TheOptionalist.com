@@ -1,18 +1,34 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import TestPaperRunner from "@/components/TestPaperRunner";
+import { hasMockTestsAccess } from "@/lib/paymentAccess";
+import { getProfileByUid, getServerSession } from "@/lib/firebaseServer";
 import { getTestPaperBySlugs, getTestSectionBySlug } from "@/lib/testLibrary";
 
-export default function TestPaperPage({
+export const dynamic = "force-dynamic";
+
+export default async function TestPaperPage({
   params
 }: {
   params: { sectionSlug: string; paperSlug: string };
 }) {
+  const { user } = await getServerSession();
+
+  if (!user) {
+    redirect(`/login?next=/tests/${params.sectionSlug}/${params.paperSlug}`);
+  }
+
   const section = getTestSectionBySlug(params.sectionSlug);
   const paper = getTestPaperBySlugs(params.sectionSlug, params.paperSlug);
 
   if (!section || !paper) {
     notFound();
+  }
+
+  const { profile } = await getProfileByUid(user.uid);
+
+  if (!hasMockTestsAccess(profile)) {
+    redirect(`/tests/${params.sectionSlug}`);
   }
 
   return (

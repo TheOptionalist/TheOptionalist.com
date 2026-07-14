@@ -26,6 +26,17 @@ type FormState = {
   course: string;
 };
 
+function getLoginRedirectDestination() {
+  if (typeof window === "undefined") return "/account";
+
+  const next = new URLSearchParams(window.location.search).get("next");
+  if (!next || !next.startsWith("/") || next.startsWith("//")) {
+    return "/account";
+  }
+
+  return next;
+}
+
 export default function LoginPage() {
   const router = useRouter();
   const [mode, setMode] = useState<AuthMode>("signin");
@@ -63,7 +74,7 @@ export default function LoginPage() {
       try {
         const token = await user.getIdToken();
         await createSession(token);
-        router.replace("/account");
+        router.replace(getLoginRedirectDestination());
         router.refresh();
       } catch {
         // Ignore auto-redirect if session sync fails.
@@ -120,7 +131,7 @@ export default function LoginPage() {
         await createSession(token);
       }
 
-      router.push("/account");
+      router.push(getLoginRedirectDestination());
       router.refresh();
     } catch (err) {
       const message =

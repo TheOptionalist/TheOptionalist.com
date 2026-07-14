@@ -1,9 +1,22 @@
 import Link from "next/link";
-import { getCourseFolders } from "@/lib/courseFolders";
+import { redirect } from "next/navigation";
+import { getAccessibleCourseFolders } from "@/lib/courseAccess";
+import { getProfileByUid, getServerSession } from "@/lib/firebaseServer";
 import { getVideoCollectionBySlug } from "@/lib/videoLibrary";
 
-export default function UPSCPrelimsPage() {
-  const prelimsFolders = getCourseFolders().filter((folder) => folder.slug.startsWith("upsc-"));
+export const dynamic = "force-dynamic";
+
+export default async function UPSCPrelimsPage() {
+  const { user } = await getServerSession();
+
+  if (!user) {
+    redirect("/login?next=/upsc-prelims");
+  }
+
+  const { profile } = await getProfileByUid(user.uid);
+  const prelimsFolders = getAccessibleCourseFolders(profile).filter((folder) =>
+    folder.slug.startsWith("upsc-")
+  );
   const totalPrelimsVideos = prelimsFolders.reduce(
     (count, folder) => count + (getVideoCollectionBySlug(folder.slug)?.videos.length ?? 0),
     0

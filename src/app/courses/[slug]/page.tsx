@@ -1,9 +1,13 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Article from "@/components/Article";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import StudyPanel from "@/components/StudyPanel";
 import { loadRawHtml, prepareArticleHtml } from "@/lib/content";
+import { hasCourseAccess } from "@/lib/courseAccess";
 import { getDriveCourseBySlug, getPublishedDriveCourses } from "@/lib/courseCatalog";
+import { getProfileByUid, getServerSession } from "@/lib/firebaseServer";
+
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
   return getPublishedDriveCourses().map((course) => ({
@@ -11,14 +15,26 @@ export function generateStaticParams() {
   }));
 }
 
-export default function DriveCoursePage({
+export default async function DriveCoursePage({
   params
 }: {
   params: { slug: string };
 }) {
+  const { user } = await getServerSession();
+
+  if (!user) {
+    redirect(`/login?next=/courses/${params.slug}`);
+  }
+
   const course = getDriveCourseBySlug(params.slug);
 
   if (!course) {
+    notFound();
+  }
+
+  const { profile } = await getProfileByUid(user.uid);
+
+  if (!hasCourseAccess(profile, course)) {
     notFound();
   }
 

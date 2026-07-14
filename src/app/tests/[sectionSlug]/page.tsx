@@ -1,19 +1,33 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import PaidUnlockButton from "@/components/PaidUnlockButton";
+import { MOCK_TESTS_PASS_PRODUCT } from "@/lib/paidLearning";
+import { hasMockTestsAccess } from "@/lib/paymentAccess";
+import { getProfileByUid, getServerSession } from "@/lib/firebaseServer";
 import { getTestPapersBySectionSlug, getTestSectionBySlug } from "@/lib/testLibrary";
 
-export default function TestSectionPage({
+export const dynamic = "force-dynamic";
+
+export default async function TestSectionPage({
   params
 }: {
   params: { sectionSlug: string };
 }) {
+  const { user } = await getServerSession();
+
+  if (!user) {
+    redirect(`/login?next=/tests/${params.sectionSlug}`);
+  }
+
   const section = getTestSectionBySlug(params.sectionSlug);
 
   if (!section) {
     notFound();
   }
 
+  const { profile } = await getProfileByUid(user.uid);
+  const hasPass = hasMockTestsAccess(profile);
   const papers = getTestPapersBySectionSlug(section.slug);
   const totalQuestions = papers.reduce((count, paper) => count + paper.questions.length, 0);
 
@@ -64,9 +78,16 @@ export default function TestSectionPage({
                   <li>{paper.duration}</li>
                   <li>{paper.sourceLabel}</li>
                 </ul>
-                <Link className="button primary" href={`/tests/${section.slug}/${paper.slug}`}>
-                  Open Test Paper
-                </Link>
+                {hasPass ? (
+                  <Link className="button primary" href={`/tests/${section.slug}/${paper.slug}`}>
+                    Open Test Paper
+                  </Link>
+                ) : (
+                  <PaidUnlockButton
+                    productId={MOCK_TESTS_PASS_PRODUCT.id}
+                    label={`Unlock all mocks for Rs ${MOCK_TESTS_PASS_PRODUCT.amountInRupees}`}
+                  />
+                )}
               </article>
             ))}
           </div>

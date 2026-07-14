@@ -2383,16 +2383,69 @@ img {
 
 .admin-table-row {
   display: grid;
-  grid-template-columns: minmax(200px, 1.3fr) minmax(140px, 1fr) minmax(160px, 1fr) minmax(120px, 0.6fr);
+  grid-template-columns:
+    minmax(180px, 1.2fr)
+    minmax(120px, 0.8fr)
+    minmax(140px, 0.9fr)
+    minmax(260px, 1.4fr)
+    minmax(120px, 0.6fr);
   gap: 16px;
   align-items: center;
   padding: 14px 18px;
   border-bottom: 1px solid var(--line);
 }
 
+.admin-enrollment-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+}
+
+.admin-enrollment-form input {
+  min-width: 0;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink);
+  padding: 10px 12px;
+}
+
 .admin-table-head {
   background: rgba(224, 112, 93, 0.12);
   font-weight: 700;
+}
+
+.paid-module-card {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+.paid-module-unlocked {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid rgba(82, 151, 112, 0.28);
+  border-radius: var(--radius-md);
+  background: rgba(82, 151, 112, 0.1);
+}
+
+.paid-unlock-action {
+  display: grid;
+  gap: 10px;
+}
+
+.paid-unlock-message {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.button.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+  pointer-events: none;
 }
 
 .reveal {
@@ -2542,6 +2595,10 @@ img {
 
 @media (max-width: 800px) {
   .admin-table-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-enrollment-form {
     grid-template-columns: 1fr;
   }
 }

@@ -8,10 +8,17 @@ type ServerSession = {
   error: Error | null;
 };
 
-type ProfileRecord = {
+export type ProfileRecord = {
   email?: string;
   program?: string | null;
   course?: string | null;
+  courseSlug?: string | null;
+  enrolledCourseSlugs?: string[];
+  enrolledCourses?: string[];
+  paidAccess?: {
+    netJrfAnthropologyModules?: string[];
+    mockTests?: boolean;
+  };
   createdAt?: unknown;
 };
 

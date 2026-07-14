@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import YouTubeVideoCard from "@/components/YouTubeVideoCard";
 import {
@@ -7,9 +7,13 @@ import {
   getCourseFolderModuleAssets,
   getCourseFolders
 } from "@/lib/courseFolders";
+import { hasCourseAccess } from "@/lib/courseAccess";
 import { getVideoCollectionBySlug } from "@/lib/videoLibrary";
+import { getProfileByUid, getServerSession } from "@/lib/firebaseServer";
 
 const MAX_EMBEDDED_VIDEOS_PER_MODULE = 3;
+
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
   return getCourseFolders().map((folder) => ({
@@ -17,14 +21,26 @@ export function generateStaticParams() {
   }));
 }
 
-export default function CourseFolderPage({
+export default async function CourseFolderPage({
   params
 }: {
   params: { slug: string };
 }) {
+  const { user } = await getServerSession();
+
+  if (!user) {
+    redirect(`/login?next=/courses/folders/${params.slug}`);
+  }
+
   const folder = getCourseFolderBySlug(params.slug);
 
   if (!folder) {
+    notFound();
+  }
+
+  const { profile } = await getProfileByUid(user.uid);
+
+  if (!hasCourseAccess(profile, folder)) {
     notFound();
   }
 

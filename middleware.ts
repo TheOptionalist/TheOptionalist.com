@@ -21,6 +21,11 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isAdminRoute = pathname.startsWith("/admin");
   const isAdminApiRoute = pathname.startsWith("/api/admin");
+  const isCourseAssetRoute = pathname.startsWith("/course-assets/");
+  const isCourseRoute =
+    pathname === "/courses" ||
+    pathname.startsWith("/courses/");
+  const isTestRoute = pathname === "/tests" || pathname.startsWith("/tests/");
 
   if (isAdminRoute || isAdminApiRoute) {
     const isLoginRoute = pathname === "/admin/login";
@@ -43,6 +48,17 @@ export function middleware(request: NextRequest) {
     }
   }
 
+  if (isCourseAssetRoute) {
+    return NextResponse.json({ error: "Not found" }, { status: 404 });
+  }
+
+  if ((isCourseRoute || isTestRoute) && !request.cookies.get("session")?.value) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    url.searchParams.set("next", `${pathname}${request.nextUrl.search}`);
+    return NextResponse.redirect(url);
+  }
+
   const target = redirects[pathname];
   if (target) {
     const url = request.nextUrl.clone();
@@ -57,6 +73,11 @@ export const config = {
     "/admin",
     "/admin/:path*",
     "/api/admin/:path*",
+    "/courses",
+    "/courses/:path*",
+    "/tests",
+    "/tests/:path*",
+    "/course-assets/:path*",
     "/index.html",
     "/Anthropology/:path*",
     "/PSIR/:path*",

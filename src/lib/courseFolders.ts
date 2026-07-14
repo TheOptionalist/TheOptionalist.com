@@ -354,7 +354,9 @@ export function getCourseFolderModuleAssets(module: CourseFolderModule): CourseF
 
   return files.map((fileName) => ({
     fileName,
-    href: `/${[...assetDir.split("/"), fileName].map(encodeURIComponent).join("/")}`,
+    href: `/api/course-assets/${[...assetDir.split("/").slice(1), fileName]
+      .map(encodeURIComponent)
+      .join("/")}`,
     title: formatAssetTitle(fileName)
   }));
 }

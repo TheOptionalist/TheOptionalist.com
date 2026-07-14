@@ -9,6 +9,7 @@ type Profile = {
   email?: string;
   program?: string | null;
   course?: string | null;
+  enrolledCourseSlugs?: string[];
   createdAt?: unknown;
 };
 
@@ -44,7 +45,8 @@ export default async function AdminPage() {
           <p className="admin-kicker">Admin Panel</p>
           <h2>User Program Overview</h2>
           <p className="admin-sub">
-            Showing latest registrations with program and course mapping.
+            Showing latest registrations with program, course mapping, and
+            assigned enrollments.
           </p>
         </div>
         <div className="admin-actions">
@@ -81,6 +83,7 @@ export default async function AdminPage() {
             <span>Email</span>
             <span>Program</span>
             <span>Course</span>
+            <span>Enrolled Slugs</span>
             <span>Joined</span>
           </div>
           {profiles.map((profile) => (
@@ -88,6 +91,18 @@ export default async function AdminPage() {
               <span>{profile.email ?? "-"}</span>
               <span>{profile.program ?? "-"}</span>
               <span>{profile.course ?? "-"}</span>
+              <form className="admin-enrollment-form" action="/api/admin/enrollments" method="post">
+                <input type="hidden" name="uid" value={profile.id} />
+                <input
+                  aria-label={`Course slugs for ${profile.email ?? profile.id}`}
+                  name="courseSlugs"
+                  placeholder="course-slug, another-slug"
+                  defaultValue={(profile.enrolledCourseSlugs ?? []).join(", ")}
+                />
+                <button className="button" type="submit">
+                  Save
+                </button>
+              </form>
               <span>{formatDate(profile.createdAt)}</span>
             </div>
           ))}

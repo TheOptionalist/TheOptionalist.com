@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { Public_Sans, Source_Serif_4 } from "next/font/google";
+import Script from "next/script";
 import AuthSessionSync from "@/components/AuthSessionSync";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import SiteHeader from "@/components/SiteHeader";
@@ -93,6 +94,7 @@ export default function RootLayout({
         <RevealOnScroll />
         <AuthSessionSync />
         <StudyAssistant />
+        <Script src="https://checkout.razorpay.com/v1/checkout.js" strategy="afterInteractive" />
       </body>
     </html>
   );
