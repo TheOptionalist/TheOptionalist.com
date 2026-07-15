@@ -13,9 +13,11 @@ import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import {
   auth,
   db,
+  firebaseClientConfigError,
   firebaseClientError,
   isFirebaseClientConfigured
 } from "@/lib/firebaseClient";
+import { getFirebaseAuthErrorDetails } from "@/lib/firebaseAuthErrors";
 
 type AuthMode = "signin" | "signup" | "reset";
 
@@ -50,8 +52,19 @@ export default function LoginPage() {
   const [notice, setNotice] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const authUnavailableMessage =
+    firebaseClientConfigError?.message ??
     firebaseClientError?.message ??
     "Firebase auth is unavailable. Add the NEXT_PUBLIC_FIREBASE_* variables before deploying.";
+
+  function formatFirebaseError(error: unknown) {
+    const details = getFirebaseAuthErrorDetails(error);
+
+    if (details.code) {
+      return `${details.message} ${details.hint}`;
+    }
+
+    return details.message;
+  }
 
   const createSession = useCallback(async (token: string) => {
     const response = await fetch("/api/auth/session", {
@@ -134,9 +147,12 @@ export default function LoginPage() {
       router.push(getLoginRedirectDestination());
       router.refresh();
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Something went wrong. Please try again.";
-      setError(message);
+      if (err instanceof Error && err.message === authUnavailableMessage) {
+        setError(err.message);
+        return;
+      }
+
+      setError(formatFirebaseError(err));
     } finally {
       setLoading(false);
     }
@@ -159,9 +175,12 @@ export default function LoginPage() {
       await sendPasswordResetEmail(auth, form.email);
       setNotice("Reset link sent. Check your inbox.");
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Could not send reset email. Try again.";
-      setError(message);
+      if (err instanceof Error && err.message === authUnavailableMessage) {
+        setError(err.message);
+        return;
+      }
+
+      setError(formatFirebaseError(err));
     } finally {
       setLoading(false);
     }
@@ -204,7 +223,7 @@ export default function LoginPage() {
         <div className="account-card auth-card">
           {!isFirebaseClientConfigured ? (
             <p className="auth-error" role="alert">
-              Firebase auth abhi configured nahi hai. Vercel me saare
+              Firebase auth abhi configured nahi hai. Vercel ya local env me missing
               `NEXT_PUBLIC_FIREBASE_*` variables add karo, phir login/signup normal
               chalega.
             </p>

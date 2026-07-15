@@ -13,6 +13,12 @@ type FirebaseClientResult = {
   error: Error | null;
 };
 
+export type FirebaseClientConfigStatus = {
+  configured: boolean;
+  missingKeys: string[];
+  message: string;
+};
+
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -22,15 +28,44 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
 };
 
-export const isFirebaseClientConfigured = Boolean(
-  firebaseConfig.apiKey &&
-    firebaseConfig.authDomain &&
-    firebaseConfig.projectId &&
-    firebaseConfig.appId
-);
+const requiredFirebaseClientKeys = [
+  "NEXT_PUBLIC_FIREBASE_API_KEY",
+  "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN",
+  "NEXT_PUBLIC_FIREBASE_PROJECT_ID",
+  "NEXT_PUBLIC_FIREBASE_APP_ID"
+] as const;
 
-const missingFirebaseClientConfigMessage =
-  "Missing Firebase client configuration. Add the NEXT_PUBLIC_FIREBASE_* variables in your environment.";
+function getFirebaseClientConfigStatus(): FirebaseClientConfigStatus {
+  const missingKeys = requiredFirebaseClientKeys.filter((key) => {
+    switch (key) {
+      case "NEXT_PUBLIC_FIREBASE_API_KEY":
+        return !firebaseConfig.apiKey;
+      case "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN":
+        return !firebaseConfig.authDomain;
+      case "NEXT_PUBLIC_FIREBASE_PROJECT_ID":
+        return !firebaseConfig.projectId;
+      case "NEXT_PUBLIC_FIREBASE_APP_ID":
+        return !firebaseConfig.appId;
+    }
+  });
+
+  return {
+    configured: missingKeys.length === 0,
+    missingKeys,
+    message: missingKeys.length
+      ? `Missing Firebase client configuration: ${missingKeys.join(", ")}.`
+      : ""
+  };
+}
+
+const firebaseClientConfigStatus = getFirebaseClientConfigStatus();
+
+export const isFirebaseClientConfigured = firebaseClientConfigStatus.configured;
+export const firebaseClientConfigError = isFirebaseClientConfigured
+  ? null
+  : new Error(
+      `${firebaseClientConfigStatus.message} Add the missing NEXT_PUBLIC_FIREBASE_* variables in your environment.`
+    );
 
 let cachedClient: FirebaseClientResult | null = null;
 
@@ -44,7 +79,7 @@ export function getFirebaseClient(): FirebaseClientResult {
       app: null,
       auth: null,
       db: null,
-      error: new Error(missingFirebaseClientConfigMessage)
+      error: firebaseClientConfigError ?? new Error("Missing Firebase client configuration.")
     };
     return cachedClient;
   }
