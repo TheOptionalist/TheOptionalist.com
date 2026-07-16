@@ -52,9 +52,11 @@ export default function LoginPage() {
   const [notice, setNotice] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const authUnavailableMessage =
-    firebaseClientConfigError?.message ??
-    firebaseClientError?.message ??
-    "Firebase auth is unavailable. Add the NEXT_PUBLIC_FIREBASE_* variables before deploying.";
+    "Account access is temporarily unavailable. Please try again later.";
+
+  if (process.env.NODE_ENV === "development" && (firebaseClientConfigError || firebaseClientError)) {
+    console.warn("Auth setup issue:", firebaseClientConfigError ?? firebaseClientError);
+  }
 
   function formatFirebaseError(error: unknown) {
     const details = getFirebaseAuthErrorDetails(error);
@@ -223,9 +225,7 @@ export default function LoginPage() {
         <div className="account-card auth-card">
           {!isFirebaseClientConfigured ? (
             <p className="auth-error" role="alert">
-              Firebase auth abhi configured nahi hai. Vercel ya local env me missing
-              `NEXT_PUBLIC_FIREBASE_*` variables add karo, phir login/signup normal
-              chalega.
+              Account access is temporarily unavailable. Please try again later.
             </p>
           ) : null}
 
@@ -356,8 +356,7 @@ export default function LoginPage() {
           </ul>
           {!isFirebaseClientConfigured ? (
             <p className="auth-error">
-              Deployment note: Vercel me `NEXT_PUBLIC_FIREBASE_*`, `FIREBASE_*`, aur
-              `ADMIN_TOKEN` env vars add karo.
+              Account access is temporarily unavailable. Please try again later.
             </p>
           ) : null}
         </aside>

@@ -12,24 +12,24 @@ export type FirebaseAuthErrorDetails = {
 };
 
 const DEFAULT_FIREBASE_AUTH_MESSAGE =
-  "Firebase auth could not complete the request. Please verify your Firebase Console settings.";
+  "We could not complete this request right now. Please try again in a little while.";
 
 const ERROR_HINTS: Record<string, string> = {
   "auth/api-key-expired":
-    "Your Firebase Web API key appears expired or invalid. Refresh the Web API key in Firebase Console and update NEXT_PUBLIC_FIREBASE_API_KEY.",
+    "Account access is temporarily unavailable. Please try again later.",
   "auth/invalid-api-key":
-    "Your Firebase Web API key is invalid. Check NEXT_PUBLIC_FIREBASE_API_KEY and make sure it belongs to the correct Firebase project.",
+    "Account access is temporarily unavailable. Please try again later.",
   "auth/unauthorized-domain":
-    "This domain is not authorized for Firebase Authentication. Add the current site to Firebase Console -> Authentication -> Settings -> Authorized domains.",
+    "Account access is not available on this domain yet. Please contact support.",
   "auth/operation-not-allowed":
-    "Email/password sign-in is disabled in Firebase Authentication. Enable the provider in Firebase Console -> Authentication -> Sign-in method."
+    "Email sign-in is temporarily unavailable. Please try again later."
 };
 
 const CODE_MESSAGES: Record<string, string> = {
-  "auth/api-key-expired": "Firebase API key expired.",
-  "auth/invalid-api-key": "Firebase API key is invalid.",
-  "auth/unauthorized-domain": "Firebase domain is not authorized.",
-  "auth/operation-not-allowed": "Firebase sign-in method is disabled."
+  "auth/api-key-expired": "Account access is temporarily unavailable.",
+  "auth/invalid-api-key": "Account access is temporarily unavailable.",
+  "auth/unauthorized-domain": "Account access is not available on this domain.",
+  "auth/operation-not-allowed": "Email sign-in is temporarily unavailable."
 };
 
 export function getFirebaseAuthErrorDetails(error: unknown): FirebaseAuthErrorDetails {
@@ -47,4 +47,3 @@ export function getFirebaseAuthErrorDetails(error: unknown): FirebaseAuthErrorDe
     hint
   };
 }
-
